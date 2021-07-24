@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -21,9 +22,11 @@ public class PesticideInfoActivity extends AppCompatActivity {
     private SQLiteDatabase mDb;
     private Menu menu;
     private Pesticide pesticide;
+    private final String TAG = "PesticideInfoActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG,"onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesticide_info);
 

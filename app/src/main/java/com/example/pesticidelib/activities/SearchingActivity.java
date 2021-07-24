@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,23 +26,27 @@ import com.example.pesticidelib.models.Pesticide;
 import com.example.pesticidelib.utilities.DatabaseHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchingActivity extends AppCompatActivity {
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private RecyclerView rv_searched_items;
-    private List<Pesticide> pesticideList;
+    private List<Pesticide> pesticideList = null;
     private ImageButton imbSearch;
     private EditText editText;
     private LinearLayoutManager linearLayoutManager;
-    private final String TAG = "logd";
+    private final String TAG = "SearchingActivity";
     private String text;
     private int choice;
+   RecyclerViewDataAdapter adapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
         setContentView(R.layout.activity_searching);
 
 
@@ -67,6 +73,23 @@ public class SearchingActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
 
         editText = findViewById(R.id.edt_search);
+        // Tham khao: https://stackoverflow.com/questions/40754174/android-implementing-search-filter-to-a-recyclerview
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
         imbSearch = findViewById(R.id.imb_search);
 
         mDBHelper = new DatabaseHelper(this);
@@ -92,11 +115,11 @@ public class SearchingActivity extends AppCompatActivity {
 //        }
 
 //        editText.onke
-        Log.d(TAG, "onCreate: ");
+
         imbSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d(TAG, "onClick: ");
+                Log.d(TAG, "onClick: ");
                 text = String.valueOf(editText.getText()).trim().replaceAll("\\s+"," ");
 //                Log.d(TAG, "text: " + text);
                 // Check if no view has focus:
@@ -104,21 +127,33 @@ public class SearchingActivity extends AppCompatActivity {
 //                if (view != null) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
+                Log.d(TAG,adapter.toString()+ "before: "+ pesticideList.toString());
                 pesticideList = mDBHelper.getSearchedItems(text, choice);
+                Log.d(TAG,adapter.toString()+ "then pesticideList = " + pesticideList.toString());
                 Toast.makeText(getBaseContext(),"Tìm thấy "+pesticideList.size()+" kết quả",Toast.LENGTH_LONG).show();
-
 
                 rv_searched_items = (RecyclerView) findViewById(R.id.rv_searched_items);
 
                 linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 rv_searched_items.setLayoutManager(linearLayoutManager);
                 rv_searched_items.setHasFixedSize(true);
-                rv_searched_items.setAdapter(new RecyclerViewDataAdapter(getApplicationContext(), pesticideList));
+
+                rv_searched_items.setAdapter(adapter);
             }
         });
     }
-
+    void filter(String text){
+        List<Pesticide> temp = new ArrayList();
+        for(Pesticide d: pesticideList){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(d.getTen().contains(text)){
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        adapter.updateList(temp);
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -146,13 +181,14 @@ public class SearchingActivity extends AppCompatActivity {
 //        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
         pesticideList = mDBHelper.getSearchedItems(text, choice);
-
+        adapter =  new RecyclerViewDataAdapter(getApplicationContext(), pesticideList);
         rv_searched_items = (RecyclerView) findViewById(R.id.rv_searched_items);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         rv_searched_items.setLayoutManager(linearLayoutManager);
         rv_searched_items.setHasFixedSize(true);
-        rv_searched_items.setAdapter(new RecyclerViewDataAdapter(getApplicationContext(), pesticideList));
+
+        rv_searched_items.setAdapter(adapter);
         Log.d(TAG, "onStart: "+pesticideList.size());
     }
 

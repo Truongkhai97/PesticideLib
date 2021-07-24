@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +21,12 @@ public class PesticideEditActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDB;
-
+    private String TAG = "PesticideEditActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG,"onCreate");
         setContentView(R.layout.activity_pesticide_edit);
 
         actionBar = getSupportActionBar();
