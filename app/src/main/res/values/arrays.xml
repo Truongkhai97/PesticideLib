@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_option">
+        <item>Tất cả</item>
+        <item>Thuốc trừ sâu</item>
+        <item>Thuốc trừ bệnh</item>
+        <item>Thuốc trừ ốc</item>
+        <item>Thuốc điều hòa sinh trưởng</item>
+        <item>Thuốc bảo quản lâm sản</item>
+    </string-array>
+</resources>
