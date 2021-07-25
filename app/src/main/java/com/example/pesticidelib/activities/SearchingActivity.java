@@ -143,16 +143,29 @@ public class SearchingActivity extends AppCompatActivity {
     }
     void filter(String text){
         List<Pesticide> temp = new ArrayList();
+        String myText;
+        Log.d(TAG,choice + "choice");
         for(Pesticide d: pesticideList){
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
-            String myText = d.getTen();
-            String engText = convertToEng(myText);
-            if(myText.toLowerCase().contains(text) || myText.toUpperCase().contains(text)||engText.toUpperCase().contains(text)||engText.toLowerCase().contains(text) ){
-
-                temp.add(d);
-
+            if(choice==2) {
+                myText= d.getHoatchat();
             }
+            else if(choice ==3){
+                myText=d.getNhom();
+            }
+            else if(choice==4){
+                myText=d.getDoituongphongtru();
+            }
+            else {
+                myText= d.getTen();
+            }
+            String engText = convertToEng(myText);
+            if(text=="")temp=pesticideList;
+             else if(myText.toLowerCase().contains(text) || myText.toUpperCase().contains(text)||engText.toUpperCase().contains(text)||engText.toLowerCase().contains(text) ){
+                temp.add(d);
+            }
+
         }
         //update recyclerview
         adapter.updateList(temp);
