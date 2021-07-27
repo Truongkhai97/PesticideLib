@@ -27,7 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static Context mContext;
     private boolean mNeedUpdate = false;
     private static DatabaseHelper mInstance;
-
+    private final String TAG = "DatabaseHelper";
+    private  boolean show_stack_trace = false;
     public static synchronized DatabaseHelper getInstance() {
 
         if (mInstance == null) {
@@ -135,6 +136,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Pesticide> getAllList() {
+        if(show_stack_trace) Log.d(TAG,"getAllList", new RuntimeException().fillInStackTrace());
         Log.d("Logd", String.valueOf(checkDataBase()));
         List<Pesticide> pesticideList = new ArrayList<>();
         mDataBase = this.getReadableDatabase();
@@ -159,6 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Pesticide> getFavList() {
+        if(show_stack_trace) Log.d(TAG,"getFavList",new RuntimeException().fillInStackTrace());
         List<Pesticide> pesticideList = new ArrayList<>();
         mDataBase = this.getReadableDatabase();
         Cursor cursor = mDataBase.rawQuery("SELECT * FROM thuoc where uathich=1", null);
@@ -182,6 +185,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Pesticide> getSearchedItems(String keyword, int choice) {
+        if(show_stack_trace) Log.d(TAG,   "getSearchedItems", new RuntimeException().fillInStackTrace());
         List<Pesticide> pesticideList = new ArrayList<>();
         mDataBase = this.getReadableDatabase();
         Cursor cursor;

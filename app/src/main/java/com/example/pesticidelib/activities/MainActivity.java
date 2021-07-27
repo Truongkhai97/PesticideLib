@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
     private List<Pesticide> pesticideList;
     public static int currentFragment = 1;
     private BottomNavigationView bottomNavigationView;
-    private String TAG = "logd";
+    private String TAG = "MainActivity";
     boolean isDoubleBackPressed = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG,"onCreate");
         setContentView(R.layout.activity_main);
 
 
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
+            Log.d(TAG,"MenuItem = "+item.toString());
             switch (item.getItemId()) {
                 case R.id.navigation_all_items:
                     actionBar.setTitle("Tất cả thuốc");

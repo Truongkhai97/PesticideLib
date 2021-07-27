@@ -22,7 +22,8 @@ import java.util.List;
 public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.PesticideDataViewHolder> {
     private List<Pesticide> pesticideList;
     private Context context;
-    private final String TAG="logd";
+    private final String TAG="RecyclerViewDataAdapter";
+    private  boolean show_stack_trace = false;
 
     public RecyclerViewDataAdapter(Context context, List<Pesticide> pesticideList) {
         this.context = context;
@@ -85,6 +86,12 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                 v.getContext().startActivity(intent);
             }
         });
+    }
+    //https://stackoverflow.com/questions/40754174/android-implementing-search-filter-to-a-recyclerview
+    public void updateList(List<Pesticide> list){
+        if(show_stack_trace) Log.d(TAG,"updateList", new RuntimeException().fillInStackTrace());
+        pesticideList = list;
+        notifyDataSetChanged();
     }
 
     @Override
