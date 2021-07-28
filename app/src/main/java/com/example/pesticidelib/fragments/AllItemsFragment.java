@@ -17,6 +17,7 @@ import com.example.pesticidelib.R;
 import com.example.pesticidelib.adapters.RecyclerViewDataAdapter;
 import com.example.pesticidelib.models.Pesticide;
 import com.example.pesticidelib.utilities.DatabaseHelper;
+import com.example.pesticidelib.utilities.GetAllItemsAsynctask;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,7 +26,9 @@ public class AllItemsFragment extends Fragment {
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private RecyclerView rv_items;
-    private List<Pesticide> pesticideList;
+    private List<Pesticide> pesticideList=null;
+    private RecyclerViewDataAdapter adapter;
+    private final String TAG="AllItemsFragment";
 
 
     public AllItemsFragment() {
@@ -51,16 +54,13 @@ public class AllItemsFragment extends Fragment {
         }
         Log.d("logd", "AllItemsFragment-onCreate-count: " + mDBHelper.count());
 
-        pesticideList = mDBHelper.getAllList();
-//        for (Pesticide pesticide : pesticideList) {
-//            Log.d("logd", pesticide.toString());
-//        }
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        pesticideList = mDBHelper.getAllList();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_items, container, false);
         rv_items = (RecyclerView) view.findViewById(R.id.rv_items);
@@ -69,7 +69,16 @@ public class AllItemsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rv_items.setLayoutManager(linearLayoutManager);
         rv_items.setHasFixedSize(true);
-        rv_items.setAdapter(new RecyclerViewDataAdapter(this.getContext(), pesticideList));
+        adapter=new RecyclerViewDataAdapter(this.getContext(), pesticideList);
+        rv_items.setAdapter(adapter);
+//        Log.d(TAG, "pesticideList size: "+pesticideList.size());
+
+        GetAllItemsAsynctask getAllItemsAsynctask=new GetAllItemsAsynctask(mDBHelper,adapter,rv_items);
+        getAllItemsAsynctask.execute();
+
+//        rv_items.setAdapter(new RecyclerViewDataAdapter(this.getContext(), pesticideList));
+
+
 //        rv_items.addOnItemTouchListener(
 //                new RecyclerView.OnItemTouchListener() {
 //                    @Override

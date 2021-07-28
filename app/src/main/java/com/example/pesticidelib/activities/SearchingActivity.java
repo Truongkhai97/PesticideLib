@@ -24,6 +24,7 @@ import com.example.pesticidelib.R;
 import com.example.pesticidelib.adapters.RecyclerViewDataAdapter;
 import com.example.pesticidelib.models.Pesticide;
 import com.example.pesticidelib.utilities.DatabaseHelper;
+import com.example.pesticidelib.utilities.FilterAsynctask;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,19 +41,20 @@ public class SearchingActivity extends AppCompatActivity {
     private final String TAG = "SearchingActivity";
     private String text;
     private int choice;
-   RecyclerViewDataAdapter adapter;
+    private RecyclerViewDataAdapter adapter;
+    private FilterAsynctask filterAsynctask=null;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
+//        Log.d(TAG, "onCreate: ");
         setContentView(R.layout.activity_searching);
 
 
         ActionBar actionbar = getSupportActionBar();
 //        actionbar.setTitle("Tìm kiếm");
-        choice=getIntent().getIntExtra("choice", 1);
+        choice = getIntent().getIntExtra("choice", 1);
         switch (choice) {
             case 2:
                 actionbar.setTitle("Tìm kiếm theo hoạt chất");
@@ -87,7 +89,11 @@ public class SearchingActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                filter(editable.toString());
+//                filter(editable.toString());
+                if(filterAsynctask!=null) filterAsynctask.cancel(true);
+                filterAsynctask=new FilterAsynctask(pesticideList,choice,adapter);
+                filterAsynctask.execute(editable.toString());
+                //can xu ly asynctask gan vi tri nay
             }
         });
         imbSearch = findViewById(R.id.imb_search);
@@ -95,17 +101,10 @@ public class SearchingActivity extends AppCompatActivity {
         mDBHelper = new DatabaseHelper(this);
 
         try {
-            mDBHelper.updateDataBase();
-        } catch (IOException mIOException) {
-            throw new Error("UnableToUpdateDatabase");
-        }
-
-        try {
             mDb = mDBHelper.getWritableDatabase();
         } catch (SQLException mSQLException) {
             throw mSQLException;
         }
-//        Log.d(TAG, "Choice: "+choice);
 
         // Check if no view has focus:
 //        View view = this.getCurrentFocus();
@@ -114,13 +113,11 @@ public class SearchingActivity extends AppCompatActivity {
 //            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 //        }
 
-//        editText.onke
 
         imbSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: ");
-                text = String.valueOf(editText.getText()).trim().replaceAll("\\s+"," ");
+                text = String.valueOf(editText.getText()).trim().replaceAll("\\s+", " ");
 //                Log.d(TAG, "text: " + text);
                 // Check if no view has focus:
 //                View view = this.getCurrentFocus();
@@ -128,8 +125,7 @@ public class SearchingActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 pesticideList = mDBHelper.getSearchedItems(text, choice);
-               // Log.d(TAG,adapter.toString()+ "then pesticideList = " + pesticideList.toString());
-                Toast.makeText(getBaseContext(),"Tìm thấy "+pesticideList.size()+" kết quả",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Tìm thấy " + pesticideList.size() + " kết quả", Toast.LENGTH_LONG).show();
 
                 rv_searched_items = (RecyclerView) findViewById(R.id.rv_searched_items);
 
@@ -141,28 +137,26 @@ public class SearchingActivity extends AppCompatActivity {
             }
         });
     }
-    void filter(String text){
+
+    void filter (String text) {
         List<Pesticide> temp = new ArrayList();
         String myText;
-        Log.d(TAG,choice + "choice");
-        for(Pesticide d: pesticideList){
+        Log.d(TAG, choice + "choice");
+        for (Pesticide d : pesticideList) {
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
-            if(choice==2) {
-                myText= d.getHoatchat();
-            }
-            else if(choice ==3){
-                myText=d.getNhom();
-            }
-            else if(choice==4){
-                myText=d.getDoituongphongtru();
-            }
-            else {
-                myText= d.getTen();
+            if (choice == 2) {
+                myText = d.getHoatchat();
+            } else if (choice == 3) {
+                myText = d.getNhom();
+            } else if (choice == 4) {
+                myText = d.getDoituongphongtru();
+            } else {
+                myText = d.getTen();
             }
             String engText = convertToEng(myText);
-            if(text=="")temp=pesticideList;
-             else if(myText.toLowerCase().contains(text) || myText.toUpperCase().contains(text)||engText.toUpperCase().contains(text)||engText.toLowerCase().contains(text) ){
+            if (text == "") temp = pesticideList;
+            else if (myText.toLowerCase().contains(text) || myText.toUpperCase().contains(text) || engText.toUpperCase().contains(text) || engText.toLowerCase().contains(text)) {
                 temp.add(d);
             }
 
@@ -170,7 +164,8 @@ public class SearchingActivity extends AppCompatActivity {
         //update recyclerview
         adapter.updateList(temp);
     }
-    public  String convertToEng(String str) {
+
+    public String convertToEng(String str) {
         str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
         str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
         str = str.replaceAll("ì|í|ị|ỉ|ĩ", "i");
@@ -188,13 +183,13 @@ public class SearchingActivity extends AppCompatActivity {
         str = str.replaceAll("Đ", "D");
         return str;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 finish();
-//                finish();
 //                Intent intent=new Intent(PesticideInfoActivity.this, MainActivity.class);
 //                startActivity(new Intent(PesticideInfoActivity.this,MainActivity.class));
 //                Log.d("logd", "onOptionsItemSelected: back button worked");
@@ -208,13 +203,10 @@ public class SearchingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        Log.d(TAG, "onStart: ");
-        text = String.valueOf(editText.getText()).trim().replaceAll("\\s+"," ");
-//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        text = String.valueOf(editText.getText()).trim().replaceAll("\\s+", " ");
 
         pesticideList = mDBHelper.getSearchedItems(text, choice);
-        adapter =  new RecyclerViewDataAdapter(getApplicationContext(), pesticideList);
+        adapter = new RecyclerViewDataAdapter(getApplicationContext(), pesticideList);
         rv_searched_items = (RecyclerView) findViewById(R.id.rv_searched_items);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -222,7 +214,7 @@ public class SearchingActivity extends AppCompatActivity {
         rv_searched_items.setHasFixedSize(true);
 
         rv_searched_items.setAdapter(adapter);
-        Log.d(TAG, "onStart: "+pesticideList.size());
+        Log.d(TAG, "onStart: " + pesticideList.size());
     }
 
     @Override

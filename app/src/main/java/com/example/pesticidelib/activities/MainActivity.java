@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //su kien khi item duoc click
+    //su kien khi tab duoc click
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 

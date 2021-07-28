@@ -89,7 +89,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
     }
     //https://stackoverflow.com/questions/40754174/android-implementing-search-filter-to-a-recyclerview
     public void updateList(List<Pesticide> list){
-        if(show_stack_trace) Log.d(TAG,"updateList", new RuntimeException().fillInStackTrace());
+//        if(show_stack_trace) Log.d(TAG,"updateList", new RuntimeException().fillInStackTrace());
         pesticideList = list;
         notifyDataSetChanged();
     }
