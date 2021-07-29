@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -36,7 +38,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActionBar actionBar;
+    //    private ActionBar actionBar;
+    private Toolbar toolbar;
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private List<Pesticide> pesticideList;
@@ -49,20 +52,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG,"onCreate");
+//        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
-
-        actionBar = getSupportActionBar();
+        toolbar = findViewById(R.id.main_activity_toolbar);
+        setSupportActionBar(toolbar);
+//        actionBar = getSupportActionBar();
 //        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+        toolbar.setBackgroundColor(Color.DKGRAY);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-//        actionBar.setTitle("Tất cả thuốc");
 
         bottomNavigationView = findViewById(R.id.navigation);
+
 //        if(getIntent()!=null) currentFragment=1;
 //        else{
 //            currentFragment=getIntent().getExtras().getInt("tab");
@@ -98,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-//        Log.d(TAG, "main-current frm: " + currentFragment);
-
     }
 
     //su kien khi tab duoc click
@@ -109,27 +112,27 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
-            Log.d(TAG,"MenuItem = "+item.toString());
+            Log.d(TAG, "MenuItem = " + item.toString());
             switch (item.getItemId()) {
                 case R.id.navigation_all_items:
-                    actionBar.setTitle("Tất cả thuốc");
+                    toolbar.setTitle("Tất cả thuốc");
                     fragment = new AllItemsFragment();
                     loadFragment(fragment);
                     currentFragment = 1;
                     return true;
                 case R.id.navigation_saved_items:
-                    actionBar.setTitle("Đã lưu");
+                    toolbar.setTitle("Đã lưu");
                     fragment = new SavedItemsFragment();
                     loadFragment(fragment);
                     currentFragment = 2;
                     return true;
                 case R.id.navigation_search:
-                    actionBar.setTitle("Tìm kiếm");
+                    toolbar.setTitle("Tìm kiếm");
                     loadFragment(new SearchFragment());
                     currentFragment = 3;
                     return true;
                 case R.id.navigation_about:
-                    actionBar.setTitle("Thông tin ứng dụng");
+                    toolbar.setTitle("Thông tin ứng dụng");
                     loadFragment(new AboutFragment());
                     currentFragment = 4;
                     return true;
@@ -175,14 +178,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.all_items_menu, menu);
 
-        MenuItem item = menu.findItem(R.id.spinner);
-        Spinner spinner = (Spinner) item.getActionView();
-        ArrayList<CharSequence> arrayList = new ArrayList<>();
-        arrayList.add("Tất cả");
-        arrayList.add("Thuốc trừ sâu");
-        arrayList.add("Thuốc trừ bệnh");
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.sort_option, android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+//        MenuItem itemSearchView=menu.findItem(R.id.action_search);
+//        SearchView searchView= (SearchView) itemSearchView.getActionView();
+//        searchView.setQueryHint("Search");
+
+//        MenuItem item = menu.findItem(R.id.spinner);
+//        Spinner spinner = (Spinner) item.getActionView();
+//        ArrayList<CharSequence> arrayList = new ArrayList<>();
+//        arrayList.add("Tất cả");
+//        arrayList.add("Thuốc trừ sâu");
+//        arrayList.add("Thuốc trừ bệnh");
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.sort_option, android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
 //        spinner.setBackgroundColor(254);
         return true;
     }

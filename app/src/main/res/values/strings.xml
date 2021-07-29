@@ -35,13 +35,4 @@
 
     <string name="contact_posted">Gửi thành công.</string>
 
-    <string-array name="test">
-        <item>Bahrain</item>
-        <item>Bangladesh</item>
-        <item>Barbados</item>
-        <item>Belarus</item>
-        <item>Belgium</item>
-        <item>Belize</item>
-        <item>Benin</item>
-    </string-array>
 </resources>

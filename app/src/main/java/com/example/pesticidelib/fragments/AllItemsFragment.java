@@ -5,15 +5,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pesticidelib.R;
+import com.example.pesticidelib.activities.MainActivity;
 import com.example.pesticidelib.adapters.RecyclerViewDataAdapter;
 import com.example.pesticidelib.models.Pesticide;
 import com.example.pesticidelib.utilities.DatabaseHelper;
@@ -26,9 +33,10 @@ public class AllItemsFragment extends Fragment {
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private RecyclerView rv_items;
-    private List<Pesticide> pesticideList=null;
+    private List<Pesticide> pesticideList = null;
     private RecyclerViewDataAdapter adapter;
-    private final String TAG="AllItemsFragment";
+    private final String TAG = "AllItemsFragment";
+    private SearchView searchView;
 
 
     public AllItemsFragment() {
@@ -54,7 +62,7 @@ public class AllItemsFragment extends Fragment {
         }
         Log.d("logd", "AllItemsFragment-onCreate-count: " + mDBHelper.count());
 
-
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -69,12 +77,34 @@ public class AllItemsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rv_items.setLayoutManager(linearLayoutManager);
         rv_items.setHasFixedSize(true);
-        adapter=new RecyclerViewDataAdapter(this.getContext(), pesticideList);
+        pesticideList=mDBHelper.getAllList();
+        adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList,rv_items);
+//        ArrayAdapter mAdapter = new ArrayAdapter(MainActivity.this,
+//                android.R.layout.simple_list_item_1,
+//                getResources().getStringArray(R.array.sort_option));
+
         rv_items.setAdapter(adapter);
+
+//        rv_items.setAdapter(mAdapter);
 //        Log.d(TAG, "pesticideList size: "+pesticideList.size());
 
-        GetAllItemsAsynctask getAllItemsAsynctask=new GetAllItemsAsynctask(mDBHelper,adapter,rv_items);
-        getAllItemsAsynctask.execute();
+//        searchView=view.findViewById(R.id.action_search);
+//        searchView.setQueryHint("Search");
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String text) {
+//                Log.d(TAG, "onQueryTextChange: "+text);
+//                return true;
+//            }
+//        });
+
+//        GetAllItemsAsynctask getAllItemsAsynctask = new GetAllItemsAsynctask(mDBHelper, adapter, rv_items);
+//        getAllItemsAsynctask.execute();
 
 //        rv_items.setAdapter(new RecyclerViewDataAdapter(this.getContext(), pesticideList));
 
@@ -100,7 +130,41 @@ public class AllItemsFragment extends Fragment {
 
         return view;
     }
-//    @Override
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        MenuItem itemSearchView = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) itemSearchView.getActionView();
+        searchView.setQueryHint("Search");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+//                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+//                Log.d(TAG, "onQueryTextChange: " + query);
+                adapter.getFilter().filter(query);
+
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        Log.d(TAG, "onOptionsItemSelected: true");
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    //    @Override
 //    public void onViewCreated(View view, Bundle savedInstanceState) {
 //        super.onViewCreated(view, savedInstanceState);
 //        view.findViewById(R.id.yourId).setOnClickListener(this);
