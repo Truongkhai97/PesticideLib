@@ -126,11 +126,15 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 Log.d(TAG, "performFiltering: called");
-                String charString = charSequence.toString();
+//                String charString = charSequence.toString();
+                String charString = charSequence.toString().trim().replaceAll("\\s+", " ");
+                List<Pesticide> filteredList;
+                FilterResults filterResults = new FilterResults();
                 if (charString.isEmpty()) {
-                    pesticideListFiltered = pesticideList;
+                    filterResults.values = pesticideList;
+                    return filterResults;
                 } else {
-                    List<Pesticide> filteredList = new ArrayList<>();
+                    filteredList = new ArrayList<>();
                     for (Pesticide row : pesticideList) {
 
                         // name match condition. this might differ depending on your requirement
@@ -141,21 +145,22 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                         }
                     }
 
-                    pesticideListFiltered = filteredList;
+//                    pesticideListFiltered = filteredList;
                 }
 
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = pesticideListFiltered;
+//                filterResults.values = pesticideListFiltered;
+                filterResults.values = filteredList;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 recyclerView.getRecycledViewPool().clear();
+//                notifyItemRangeRemoved(0,pesticideListFiltered.size());
                 pesticideListFiltered = (ArrayList<Pesticide>) filterResults.values;
-
                 // refresh the list with filtered data
                 Log.d(TAG, "items found: " + pesticideListFiltered.size());
+
                 notifyDataSetChanged();
             }
         };

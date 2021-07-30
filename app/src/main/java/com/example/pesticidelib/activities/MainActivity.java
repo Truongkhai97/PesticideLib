@@ -52,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.main_activity_toolbar);
         setSupportActionBar(toolbar);
+        Log.d(TAG, "onCreate: "+toolbar.getTitle());
 //        actionBar = getSupportActionBar();
 //        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 //        actionBar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 //        else{
 //            currentFragment=getIntent().getExtras().getInt("tab");
 //        }
+
+        //quay lai tab ban dau
         switch (currentFragment) {
 //            case 1:
 //                loadFragment(new AllItemsFragment());
@@ -95,12 +97,14 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.navigation_about).performClick();
                 Log.d(TAG, "case 4: ");
                 break;
+
             default:
 //                loadFragment(new AllItemsFragment());
 //                bottomNavigationView.setSelectedItemId(R.id.navigation_all_items);
                 Log.d(TAG, "case 1: ");
                 findViewById(R.id.navigation_all_items).performClick();
-                break;
+                Log.d(TAG, "switch: "+toolbar.getTitle());
+//                break;
         }
 
     }
@@ -116,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_all_items:
                     toolbar.setTitle("Tất cả thuốc");
+                    Log.d(TAG, "onNavigationItemSelected: chosed!"+toolbar.getTitle());
                     fragment = new AllItemsFragment();
                     loadFragment(fragment);
                     currentFragment = 1;
@@ -176,6 +181,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        Log.d(TAG, "onCreateOptionsMenu: then title change here!"+toolbar.getTitle());
+//        toolbar.setTitle("TCT");
         getMenuInflater().inflate(R.menu.all_items_menu, menu);
 
 //        MenuItem itemSearchView=menu.findItem(R.id.action_search);
