@@ -7,23 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/main_activity_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/main_activity_toolbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="?attr/colorPrimary"-->
+    <!--        android:minHeight="?attr/actionBarSize"-->
+    <!--        app:theme="@style/ThemeOverlay.AppCompat.Dark" />-->
 
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="50dp"
-        app:layout_anchor="@id/main_activity_toolbar"
         app:layout_anchorGravity="bottom"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <!--        app:layout_anchor="@id/main_activity_toolbar"-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"

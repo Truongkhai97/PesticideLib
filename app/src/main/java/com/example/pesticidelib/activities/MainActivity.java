@@ -1,5 +1,6 @@
 package com.example.pesticidelib.activities;
 
+import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
@@ -38,8 +40,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    private ActionBar actionBar;
-    private Toolbar toolbar;
+    private ActionBar toolbar;
+    //    private Toolbar toolbar;
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private List<Pesticide> pesticideList;
@@ -54,13 +56,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.main_activity_toolbar);
-        setSupportActionBar(toolbar);
-        Log.d(TAG, "onCreate: "+toolbar.getTitle());
-//        actionBar = getSupportActionBar();
+//        toolbar = findViewById(R.id.main_activity_toolbar);
+//        setSupportActionBar(toolbar);
+        toolbar = getSupportActionBar();
 //        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
-        toolbar.setBackgroundColor(Color.DKGRAY);
+        toolbar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+//        toolbar.setBackgroundColor(Color.DKGRAY);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 //                bottomNavigationView.setSelectedItemId(R.id.navigation_all_items);
                 Log.d(TAG, "case 1: ");
                 findViewById(R.id.navigation_all_items).performClick();
-                Log.d(TAG, "switch: "+toolbar.getTitle());
+                Log.d(TAG, "switch: " + toolbar.getTitle());
 //                break;
         }
 
@@ -116,11 +117,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
-            Log.d(TAG, "MenuItem = " + item.toString());
+//            Log.d(TAG, "MenuItem = " + item.toString());
             switch (item.getItemId()) {
                 case R.id.navigation_all_items:
                     toolbar.setTitle("Tất cả thuốc");
-                    Log.d(TAG, "onNavigationItemSelected: chosed!"+toolbar.getTitle());
                     fragment = new AllItemsFragment();
                     loadFragment(fragment);
                     currentFragment = 1;
@@ -179,12 +179,16 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        Log.d(TAG, "onCreateOptionsMenu: then title change here!"+toolbar.getTitle());
-//        toolbar.setTitle("TCT");
+        Log.d(TAG, "onCreateOptionsMenu: then title change here!" + toolbar.getTitle());
         getMenuInflater().inflate(R.menu.all_items_menu, menu);
+        if(menu instanceof MenuBuilder){
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
 
 //        MenuItem itemSearchView=menu.findItem(R.id.action_search);
 //        SearchView searchView= (SearchView) itemSearchView.getActionView();

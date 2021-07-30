@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
 
-    <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="Search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
-    <item
-        android:id="@+id/action_filter"
-        android:icon="@drawable/filter"
-        android:title="Filter"
-        app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/action_search"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Search"
+            app:actionViewClass="androidx.appcompat.widget.SearchView"
+            app:showAsAction="ifRoom|collapseActionView" />
+        <!--    <item-->
+        <!--        android:id="@+id/action_choose"-->
+        <!--        android:icon="@android:drawable/ic_menu_search"-->
+        <!--        android:title="Search"-->
+        <!--        app:actionViewClass="com.google.android.material.navigation.NavigationView"-->
+        <!--        app:showAsAction="ifRoom|collapseActionView" />-->
+        <item
+            android:id="@+id/option_search_by_name"
+            android:icon="@drawable/search"
+            android:title="Tìm theo tên" />
+        <item
+            android:id="@+id/option_search_by_disease"
+            android:icon="@drawable/search"
+            android:title="Tìm theo bệnh" />
+        <item
+            android:id="@+id/option_search_by_active_ingredient"
+            android:icon="@drawable/search"
+            android:title="Tìm theo hoạt chất" />
+        <item
+            android:id="@+id/option_search_by_producer"
+            android:icon="@drawable/search"
+            android:title="Tìm theo nhà sản xuất" />
+        <!--    <item-->
+        <!--        android:id="@+id/action_filter"-->
+        <!--        android:icon="@drawable/filter"-->
+        <!--        android:title="Filter"-->
+        <!--        app:showAsAction="ifRoom"/>-->
+    </group>
 </menu>

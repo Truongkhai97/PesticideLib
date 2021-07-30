@@ -38,6 +38,7 @@ public class AllItemsFragment extends Fragment {
     private RecyclerViewDataAdapter adapter;
     private final String TAG = "AllItemsFragment";
     private SearchView searchView;
+    private Menu menu;
 
 
     public AllItemsFragment() {
@@ -78,8 +79,8 @@ public class AllItemsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rv_items.setLayoutManager(linearLayoutManager);
         rv_items.setHasFixedSize(true);
-        pesticideList=mDBHelper.getAllList();
-        adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList,rv_items);
+        pesticideList = mDBHelper.getAllList();
+        adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
 //        ArrayAdapter mAdapter = new ArrayAdapter(MainActivity.this,
 //                android.R.layout.simple_list_item_1,
 //                getResources().getStringArray(R.array.sort_option));
@@ -134,6 +135,7 @@ public class AllItemsFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        this.menu = menu;
         MenuItem itemSearchView = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) itemSearchView.getActionView();
         searchView.setQueryHint("Search");
@@ -160,7 +162,29 @@ public class AllItemsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //        Log.d(TAG, "onOptionsItemSelected: true");
-
+        SearchView searchView = (SearchView) menu.getItem(0).getActionView();
+        switch (item.getItemId()) {
+            case R.id.option_search_by_name:
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                searchView.setQueryHint("Tên thuốc");
+                break;
+            case R.id.option_search_by_disease:
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                searchView.setQueryHint("Tên bệnh");
+                break;
+            case R.id.option_search_by_active_ingredient:
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                searchView.setQueryHint("Tên hoạt chất");
+                break;
+            case R.id.option_search_by_producer:
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                searchView.setQueryHint("Tên nhà sản xuất");
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }
