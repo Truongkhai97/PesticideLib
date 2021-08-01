@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(false);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchingActivity.class);
-                intent.putExtra("choice",1);
+                intent.putExtra("choice", 1);
                 startActivity(intent);
             }
         });
@@ -78,7 +78,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchingActivity.class);
-                intent.putExtra("choice",2);
+                intent.putExtra("choice", 2);
                 startActivity(intent);
             }
         });
@@ -88,7 +88,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchingActivity.class);
-                intent.putExtra("choice",3);
+                intent.putExtra("choice", 3);
                 startActivity(intent);
             }
         });
@@ -98,7 +98,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchingActivity.class);
-                intent.putExtra("choice",4);
+                intent.putExtra("choice", 4);
                 startActivity(intent);
             }
         });
@@ -108,7 +108,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchingActivity.class);
-                intent.putExtra("choice",5);
+                intent.putExtra("choice", 5);
                 startActivity(intent);
             }
         });

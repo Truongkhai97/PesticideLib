@@ -125,7 +125,10 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                Log.d(TAG, "performFiltering: called");
+                String newText;
+                int choice = Integer.parseInt(charSequence.toString().substring(charSequence.length() - 1, charSequence.length()));
+                charSequence = charSequence.toString().substring(0, charSequence.length() - 1);
+                Log.d(TAG, "performFiltering: " + choice);
 //                String charString = charSequence.toString();
                 String charString = charSequence.toString().trim().replaceAll("\\s+", " ");
                 List<Pesticide> filteredList;
@@ -135,14 +138,36 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                     return filterResults;
                 } else {
                     filteredList = new ArrayList<>();
-                    for (Pesticide row : pesticideList) {
-
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name or phone number match
-                        if (row.getTen().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
-                            filteredList.add(row);
-//                            Log.d(TAG, "performFiltering: added");
-                        }
+                    switch (choice) {
+                        case 2:
+                            for (Pesticide row : pesticideList) {
+                                // name match condition. this might differ depending on your requirement
+                                // here we are looking for name or phone number match
+                                if (row.getDoituongphongtru().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+                                    filteredList.add(row);
+                                }
+                            }
+                            break;
+                        case 3:
+                            for (Pesticide row : pesticideList) {
+                                if (row.getHoatchat().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+                                    filteredList.add(row);
+                                }
+                            }
+                            break;
+                        case 4:
+                            for (Pesticide row : pesticideList) {
+                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+                                    filteredList.add(row);
+                                }
+                            }
+                            break;
+                        default:
+                            for (Pesticide row : pesticideList) {
+                                if (row.getTen().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+                                    filteredList.add(row);
+                                }
+                            }
                     }
 
 //                    pesticideListFiltered = filteredList;

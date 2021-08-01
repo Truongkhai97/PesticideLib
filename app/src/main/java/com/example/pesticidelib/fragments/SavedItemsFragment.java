@@ -3,6 +3,7 @@ package com.example.pesticidelib.fragments;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class SavedItemsFragment extends Fragment {
 //        for (Pesticide pesticide : pesticideList) {
 //            Log.d("logd", pesticide.toString());
 //        }
+        setHasOptionsMenu(false);
 
     }
 
@@ -64,14 +66,26 @@ public class SavedItemsFragment extends Fragment {
         rv_fav_items = (RecyclerView) view.findViewById(R.id.rv_fav_items);
 //        ImageView imv_save = (ImageView) view.findViewById(R.id.imv_save);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
-        rv_fav_items.setLayoutManager(linearLayoutManager);
-        rv_fav_items.setHasFixedSize(true);
-        RecyclerViewDataAdapter adapter=new RecyclerViewDataAdapter(this.getContext(), pesticideList);
-        rv_fav_items.setAdapter(new RecyclerViewDataAdapter(this.getContext(), pesticideList));
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+//        rv_fav_items.setLayoutManager(linearLayoutManager);
+//        rv_fav_items.setHasFixedSize(true);
+////        RecyclerViewDataAdapter adapter=new RecyclerViewDataAdapter(this.getContext(), pesticideList);
+//        rv_fav_items.setAdapter(new RecyclerViewDataAdapter(this.getContext(), pesticideList));
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        rv_fav_items.setLayoutManager(linearLayoutManager);
+        rv_fav_items.setHasFixedSize(true);
+//        RecyclerViewDataAdapter adapter=new RecyclerViewDataAdapter(this.getContext(), pesticideList);
+        rv_fav_items.setAdapter(new RecyclerViewDataAdapter(this.getContext(), pesticideList));
+    }
+
+
 //    @Override
 //    public void onViewCreated(View view, Bundle savedInstanceState) {
 //        super.onViewCreated(view, savedInstanceState);

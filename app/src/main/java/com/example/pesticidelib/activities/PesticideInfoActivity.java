@@ -103,6 +103,7 @@ public class PesticideInfoActivity extends AppCompatActivity {
                 Intent intent=new Intent(this,PesticideEditActivity.class);
                 intent.putExtra("pesticide",pesticide);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 break;
@@ -112,16 +113,18 @@ public class PesticideInfoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (MainActivity.getCurrentFragment() == 3) {
-            super.onBackPressed();
+        super.onBackPressed();
+        finish();
+//        finishAffinity();
+
+//        if (MainActivity.getCurrentFragment() == 3) {
+//            super.onBackPressed();
+//        } else {
 //            finishAffinity();
-        } else {
-            finishAffinity();
-            Intent intent = new Intent(PesticideInfoActivity.this, MainActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-//        finish();
+//            Intent intent = new Intent(PesticideInfoActivity.this, MainActivity.class);
+////            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//        }
     }
 
     @Override

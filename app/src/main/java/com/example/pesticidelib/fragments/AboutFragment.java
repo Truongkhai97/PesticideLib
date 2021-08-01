@@ -62,7 +62,7 @@ public class AboutFragment extends Fragment implements HideVirtualKeyBoard {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(false);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class AboutFragment extends Fragment implements HideVirtualKeyBoard {
 
     @Override
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

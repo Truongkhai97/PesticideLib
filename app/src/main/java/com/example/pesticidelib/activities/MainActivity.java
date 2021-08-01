@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private String TAG = "MainActivity";
     boolean isDoubleBackPressed = false;
+    private Menu menu;
 
 
     @Override
@@ -104,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
 //                bottomNavigationView.setSelectedItemId(R.id.navigation_all_items);
                 Log.d(TAG, "case 1: ");
                 findViewById(R.id.navigation_all_items).performClick();
-                Log.d(TAG, "switch: " + toolbar.getTitle());
 //                break;
         }
 
@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_all_items:
                     toolbar.setTitle("Tất cả thuốc");
                     fragment = new AllItemsFragment();
+//                    if (menu != null)
+//                    menu.getItem(0).setVisible(true);
                     loadFragment(fragment);
                     currentFragment = 1;
                     return true;
@@ -129,16 +131,34 @@ public class MainActivity extends AppCompatActivity {
                     toolbar.setTitle("Đã lưu");
                     fragment = new SavedItemsFragment();
                     loadFragment(fragment);
+//                    if (menu != null) {
+//                        menu.getItem(1).setVisible(false);
+//                        menu.getItem(2).setVisible(false);
+//                        menu.getItem(3).setVisible(false);
+//                        menu.getItem(4).setVisible(false);
+//                    }
                     currentFragment = 2;
                     return true;
                 case R.id.navigation_search:
                     toolbar.setTitle("Tìm kiếm");
                     loadFragment(new SearchFragment());
+//                    if (menu != null) {
+//                        menu.getItem(1).setVisible(false);
+//                        menu.getItem(2).setVisible(false);
+//                        menu.getItem(3).setVisible(false);
+//                        menu.getItem(4).setVisible(false);
+//                    }
                     currentFragment = 3;
                     return true;
                 case R.id.navigation_about:
                     toolbar.setTitle("Thông tin ứng dụng");
                     loadFragment(new AboutFragment());
+//                    if (menu != null) {
+//                        menu.getItem(1).setVisible(false);
+//                        menu.getItem(2).setVisible(false);
+//                        menu.getItem(3).setVisible(false);
+//                        menu.getItem(4).setVisible(false);
+//                    }
                     currentFragment = 4;
                     return true;
             }
@@ -182,13 +202,13 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        Log.d(TAG, "onCreateOptionsMenu: then title change here!" + toolbar.getTitle());
-        getMenuInflater().inflate(R.menu.all_items_menu, menu);
-        if(menu instanceof MenuBuilder){
-            MenuBuilder m = (MenuBuilder) menu;
-            m.setOptionalIconsVisible(true);
-        }
+//        this.menu = menu;
+//        Log.d(TAG, "onCreateOptionsMenu: then title change here!" + toolbar.getTitle());
+//        getMenuInflater().inflate(R.menu.all_items_menu, menu);
+//        if (menu instanceof MenuBuilder) {
+//            MenuBuilder m = (MenuBuilder) menu;
+//            m.setOptionalIconsVisible(true);
+//        }
 
 //        MenuItem itemSearchView=menu.findItem(R.id.action_search);
 //        SearchView searchView= (SearchView) itemSearchView.getActionView();

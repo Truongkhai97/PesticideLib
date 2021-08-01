@@ -1,5 +1,6 @@
 package com.example.pesticidelib.fragments;
 
+import android.annotation.SuppressLint;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,7 +39,8 @@ public class AllItemsFragment extends Fragment {
     private List<Pesticide> pesticideList = null;
     private RecyclerViewDataAdapter adapter;
     private final String TAG = "AllItemsFragment";
-    private SearchView searchView;
+    private int choice = 1;
+    private SearchView searchView = null;
     private Menu menu;
 
 
@@ -70,7 +73,7 @@ public class AllItemsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        pesticideList = mDBHelper.getAllList();
+        Log.d(TAG, "onCreateView: ");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_items, container, false);
         rv_items = (RecyclerView) view.findViewById(R.id.rv_items);
@@ -133,11 +136,19 @@ public class AllItemsFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         this.menu = menu;
+
+        getActivity().getMenuInflater().inflate(R.menu.all_items_menu, menu);
+        if (menu instanceof MenuBuilder) {
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
+
         MenuItem itemSearchView = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) itemSearchView.getActionView();
+        searchView = (SearchView) itemSearchView.getActionView();
         searchView.setQueryHint("Search");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -152,6 +163,7 @@ public class AllItemsFragment extends Fragment {
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
 //                Log.d(TAG, "onQueryTextChange: " + query);
+                query = query + choice;
                 adapter.getFilter().filter(query);
 
                 return false;
@@ -161,35 +173,80 @@ public class AllItemsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        Log.d(TAG, "onOptionsItemSelected: true");
-        SearchView searchView = (SearchView) menu.getItem(0).getActionView();
+        Log.d(TAG, "onOptionsItemSelected: true");
+//        SearchView searchView = (SearchView) menu.getItem(0).getActionView();
         switch (item.getItemId()) {
             case R.id.option_search_by_name:
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
+                choice = 1;
                 searchView.setQueryHint("Tên thuốc");
                 break;
             case R.id.option_search_by_disease:
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
+                choice = 2;
                 searchView.setQueryHint("Tên bệnh");
+
                 break;
             case R.id.option_search_by_active_ingredient:
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
+                choice = 3;
                 searchView.setQueryHint("Tên hoạt chất");
                 break;
             case R.id.option_search_by_producer:
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
+                choice = 4;
                 searchView.setQueryHint("Tên nhà sản xuất");
                 break;
         }
+        adapter.getFilter().filter(searchView.getQuery().toString() + choice);
 
         return super.onOptionsItemSelected(item);
     }
 
-    //    @Override
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+//        if (searchView != null & pesticideList != null) {
+        if (searchView != null) {
+            pesticideList = mDBHelper.getAllList();
+            Log.d(TAG, "onResume: refeshed list");
+            adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+            rv_items.setAdapter(adapter);
+            adapter.getFilter().filter(searchView.getQuery().toString() + choice);
+        }
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
+
+//    @Override
 //    public void onViewCreated(View view, Bundle savedInstanceState) {
 //        super.onViewCreated(view, savedInstanceState);
 //        view.findViewById(R.id.yourId).setOnClickListener(this);
