@@ -19,42 +19,18 @@ import com.example.pesticidelib.utilities.HideVirtualKeyBoard;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AboutFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AboutFragment extends Fragment implements HideVirtualKeyBoard {
     EditText your_name, your_email, your_subject, your_message;
-    Button email;
+    Button btnSend;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public AboutFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AboutFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AboutFragment newInstance(String param1, String param2) {
+    public static AboutFragment newInstance() {
         AboutFragment fragment = new AboutFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -115,10 +91,8 @@ public class AboutFragment extends Fragment implements HideVirtualKeyBoard {
         });
 
 
-        email = (Button) view.findViewById(R.id.post_message);
-
-
-        email.setOnClickListener(new View.OnClickListener() {
+        btnSend = (Button) view.findViewById(R.id.post_message);
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

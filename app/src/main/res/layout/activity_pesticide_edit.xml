@@ -15,93 +15,98 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:id="@+id/edit_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="30dp"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
             android:orientation="vertical">
+            <!--            android:clickable="true"-->
+            <!--            android:focusableInTouchMode="true"-->
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="3dp"
                 android:text="Tên thuốc"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/edt_ten"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
+                android:background="#DCEFFF"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="14sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="3dp"
                 android:text="Hoạt chất"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/edt_hoatchat"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
+                android:background="#DCEFFF"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="14sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="3dp"
                 android:text="Nhóm"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/edt_nhom"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
+                android:background="#DCEFFF"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="14sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:paddingLeft="3dp"
                 android:text="Tổ chức đăng ký"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/edt_tochucdangky"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:background="#DCEFFF"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:paddingLeft="3dp"
                 android:text="Đối tượng phòng trừ"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+id/edt_doituongphongtru"
@@ -109,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:height="150dp"
+                android:background="#DCEFFF"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
@@ -118,12 +124,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="150dp"
                 android:background="@color/colorPrimary"
                 android:paddingLeft="15dp"
                 android:paddingTop="1dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="1dp"
-                android:layout_marginBottom="150dp"
                 android:text="Lưu"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"

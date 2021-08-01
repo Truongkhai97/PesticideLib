@@ -4,18 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pesticidelib.R;
 import com.example.pesticidelib.models.Pesticide;
 import com.example.pesticidelib.utilities.DatabaseHelper;
+import com.example.pesticidelib.utilities.HideVirtualKeyBoard;
 
 public class PesticideInfoActivity extends AppCompatActivity {
     private DatabaseHelper mDBHelper;
@@ -26,7 +30,7 @@ public class PesticideInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG,"onCreate");
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesticide_info);
 
@@ -100,8 +104,8 @@ public class PesticideInfoActivity extends AppCompatActivity {
 
 //                Toast.makeText(this, "edit", Toast.LENGTH_SHORT).show();
                 //intent toi activity moi co giao dien sua thong tin
-                Intent intent=new Intent(this,PesticideEditActivity.class);
-                intent.putExtra("pesticide",pesticide);
+                Intent intent = new Intent(this, PesticideEditActivity.class);
+                intent.putExtra("pesticide", pesticide);
                 startActivity(intent);
                 finish();
                 break;
@@ -136,4 +140,5 @@ public class PesticideInfoActivity extends AppCompatActivity {
         } else menu.getItem(0).setIcon(R.drawable.remove_from_fav);
         return true;
     }
+
 }

@@ -87,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.navigation_saved_items).performClick();
                 Log.d(TAG, "case 2: ");
                 break;
-            case 3:
-//                loadFragment(new SearchFragment());
-//                bottomNavigationView.setSelectedItemId(R.id.navigation_search);
-                findViewById(R.id.navigation_search).performClick();
-                Log.d(TAG, "case 3: ");
-                break;
+//            case 3:
+////                loadFragment(new SearchFragment());
+////                bottomNavigationView.setSelectedItemId(R.id.navigation_search);
+//                findViewById(R.id.navigation_search).performClick();
+//                Log.d(TAG, "case 3: ");
+//                break;
             case 4:
 //                loadFragment(new AboutFragment());
 //                bottomNavigationView.setSelectedItemId(R.id.navigation_about);
@@ -122,8 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_all_items:
                     toolbar.setTitle("Tất cả thuốc");
                     fragment = new AllItemsFragment();
-//                    if (menu != null)
-//                    menu.getItem(0).setVisible(true);
                     loadFragment(fragment);
                     currentFragment = 1;
                     return true;
@@ -131,34 +129,17 @@ public class MainActivity extends AppCompatActivity {
                     toolbar.setTitle("Đã lưu");
                     fragment = new SavedItemsFragment();
                     loadFragment(fragment);
-//                    if (menu != null) {
-//                        menu.getItem(1).setVisible(false);
-//                        menu.getItem(2).setVisible(false);
-//                        menu.getItem(3).setVisible(false);
-//                        menu.getItem(4).setVisible(false);
-//                    }
                     currentFragment = 2;
                     return true;
-                case R.id.navigation_search:
-                    toolbar.setTitle("Tìm kiếm");
-                    loadFragment(new SearchFragment());
-//                    if (menu != null) {
-//                        menu.getItem(1).setVisible(false);
-//                        menu.getItem(2).setVisible(false);
-//                        menu.getItem(3).setVisible(false);
-//                        menu.getItem(4).setVisible(false);
-//                    }
-                    currentFragment = 3;
-                    return true;
+//                case R.id.navigation_search:
+//                    toolbar.setTitle("Tìm kiếm");
+//                    loadFragment(new SearchFragment());
+//
+//                    currentFragment = 3;
+//                    return true;
                 case R.id.navigation_about:
-                    toolbar.setTitle("Thông tin ứng dụng");
+                    toolbar.setTitle("Thông tin liên hệ");
                     loadFragment(new AboutFragment());
-//                    if (menu != null) {
-//                        menu.getItem(1).setVisible(false);
-//                        menu.getItem(2).setVisible(false);
-//                        menu.getItem(3).setVisible(false);
-//                        menu.getItem(4).setVisible(false);
-//                    }
                     currentFragment = 4;
                     return true;
             }
