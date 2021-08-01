@@ -89,6 +89,7 @@ public class SearchingActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.d(TAG, "afterTextChanged: called!");
 //                filter(editable.toString());
                 if(filterAsynctask!=null) filterAsynctask.cancel(true);
                 filterAsynctask=new FilterAsynctask(pesticideList,choice,adapter);
@@ -96,6 +97,8 @@ public class SearchingActivity extends AppCompatActivity {
                 //can xu ly asynctask gan vi tri nay
             }
         });
+        
+        
         imbSearch = findViewById(R.id.imb_search);
 
         mDBHelper = new DatabaseHelper(this);

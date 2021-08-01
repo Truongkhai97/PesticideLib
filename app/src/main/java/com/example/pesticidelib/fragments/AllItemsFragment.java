@@ -84,13 +84,12 @@ public class AllItemsFragment extends Fragment {
         rv_items.setHasFixedSize(true);
         pesticideList = mDBHelper.getAllList();
         adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
-//        ArrayAdapter mAdapter = new ArrayAdapter(MainActivity.this,
-//                android.R.layout.simple_list_item_1,
-//                getResources().getStringArray(R.array.sort_option));
 
         rv_items.setAdapter(adapter);
+        //su dung assynctask
+//        GetAllItemsAsynctask getAllItemsAsynctask=new GetAllItemsAsynctask(mDBHelper, adapter, rv_items);
+//        getAllItemsAsynctask.execute();
 
-//        rv_items.setAdapter(mAdapter);
 //        Log.d(TAG, "pesticideList size: "+pesticideList.size());
 
 //        searchView=view.findViewById(R.id.action_search);
@@ -162,7 +161,7 @@ public class AllItemsFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
-//                Log.d(TAG, "onQueryTextChange: " + query);
+                Log.d(TAG, "onQueryTextChange: " + query);
                 query = query + choice;
                 adapter.getFilter().filter(query);
 
@@ -220,7 +219,6 @@ public class AllItemsFragment extends Fragment {
 //        if (searchView != null & pesticideList != null) {
         if (searchView != null) {
             pesticideList = mDBHelper.getAllList();
-            Log.d(TAG, "onResume: refeshed list");
             adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
             rv_items.setAdapter(adapter);
             adapter.getFilter().filter(searchView.getQuery().toString() + choice);

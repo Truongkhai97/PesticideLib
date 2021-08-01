@@ -102,6 +102,14 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
     //https://stackoverflow.com/questions/40754174/android-implementing-search-filter-to-a-recyclerview
     public void updateList(List<Pesticide> list) {
+//        recyclerView.getRecycledViewPool().clear();
+//        if(show_stack_trace) Log.d(TAG,"updateList", new RuntimeException().fillInStackTrace());
+        pesticideListFiltered = list;
+        notifyDataSetChanged();
+    }
+
+    public void updateListItems(List<Pesticide> list, RecyclerView recyclerView) {
+        recyclerView.getRecycledViewPool().clear();
 //        if(show_stack_trace) Log.d(TAG,"updateList", new RuntimeException().fillInStackTrace());
         pesticideListFiltered = list;
         notifyDataSetChanged();
@@ -125,12 +133,14 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String newText;
                 int choice = Integer.parseInt(charSequence.toString().substring(charSequence.length() - 1, charSequence.length()));
                 charSequence = charSequence.toString().substring(0, charSequence.length() - 1);
-                Log.d(TAG, "performFiltering: " + choice);
-//                String charString = charSequence.toString();
-                String charString = charSequence.toString().trim().replaceAll("\\s+", " ");
+
+                String charString = charSequence.toString().trim().replaceAll("\\s+", " ").toLowerCase();
+                Log.d("AllItemsFragment", "performFiltering: " + charString);
+
+                //dung cho tim kiem khong dau
+//                String charStringEng = convertToEng(charSequence.toString()).toLowerCase();
                 List<Pesticide> filteredList;
                 FilterResults filterResults = new FilterResults();
                 if (charString.isEmpty()) {
@@ -141,31 +151,37 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                     switch (choice) {
                         case 2:
                             for (Pesticide row : pesticideList) {
-                                // name match condition. this might differ depending on your requirement
-                                // here we are looking for name or phone number match
-                                if (row.getDoituongphongtru().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+//                                if (convertToEng(row.getDoituongphongtru()).toLowerCase().contains(charStringEng.toLowerCase())) {
+                                if (row.getDoituongphongtru().toLowerCase().contains(charString)) {
                                     filteredList.add(row);
                                 }
                             }
                             break;
                         case 3:
                             for (Pesticide row : pesticideList) {
-                                if (row.getHoatchat().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+//                                if (row.getHoatchat().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+//                                if (convertToEng(row.getHoatchat()).toLowerCase().contains(charStringEng.toLowerCase())) {
+                                if (row.getHoatchat().toLowerCase().contains(charString)) {
                                     filteredList.add(row);
                                 }
                             }
                             break;
                         case 4:
                             for (Pesticide row : pesticideList) {
-                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+//                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+//                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+                                if (row.getTochucdangky().toLowerCase().contains(charString)) {
                                     filteredList.add(row);
                                 }
                             }
                             break;
                         default:
                             for (Pesticide row : pesticideList) {
-                                if (row.getTen().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+//                                if (row.getTen().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+//                                if (convertToEng(row.getTen()).toLowerCase().contains(charStringEng.toLowerCase())) {
+                                if (row.getTen().toLowerCase().contains(charString)) {
                                     filteredList.add(row);
+//                                    Log.d(TAG, "performFiltering: added");
                                 }
                             }
                     }
@@ -189,7 +205,27 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                 notifyDataSetChanged();
             }
         };
+
     }
+
+//    public String convertToEng(String str) {
+//        str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
+//        str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
+//        str = str.replaceAll("ì|í|ị|ỉ|ĩ", "i");
+//        str = str.replaceAll("ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ", "o");
+//        str = str.replaceAll("ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ", "u");
+//        str = str.replaceAll("ỳ|ý|ỵ|ỷ|ỹ", "y");
+//        str = str.replaceAll("đ", "d");
+//
+//        str = str.replaceAll("À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ", "A");
+//        str = str.replaceAll("È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ", "E");
+//        str = str.replaceAll("Ì|Í|Ị|Ỉ|Ĩ", "I");
+//        str = str.replaceAll("Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ", "O");
+//        str = str.replaceAll("Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ", "U");
+//        str = str.replaceAll("Ỳ|Ý|Ỵ|Ỷ|Ỹ", "Y");
+//        str = str.replaceAll("Đ", "D");
+//        return str;
+//    }
 
 //    @Override
 //    public void onClick(View view) {
