@@ -149,7 +149,7 @@ public class AllItemsFragment extends Fragment {
 
         MenuItem itemSearchView = menu.findItem(R.id.action_search);
         searchView = (SearchView) itemSearchView.getActionView();
-        searchView.setQueryHint("Search");
+        searchView.setQueryHint("Tên thuốc");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -187,7 +187,6 @@ public class AllItemsFragment extends Fragment {
                 item.setChecked(true);
                 choice = 2;
                 searchView.setQueryHint("Tên bệnh hoặc loại cây");
-
                 break;
             case R.id.option_search_by_active_ingredient:
                 menu.findItem(R.id.action_search).expandActionView();

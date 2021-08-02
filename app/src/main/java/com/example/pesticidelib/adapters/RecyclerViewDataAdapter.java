@@ -29,6 +29,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
     private boolean show_stack_trace = false;
     private List<Pesticide> pesticideListFiltered;
     private RecyclerView recyclerView;
+    private int choice = 1;
 
     public RecyclerViewDataAdapter(Context context, List<Pesticide> pesticideList) {
         this.context = context;
@@ -36,7 +37,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         this.pesticideListFiltered = pesticideList;
     }
 
-//    public RecyclerViewDataAdapter(Context context, List<String> stringList, int choice) {
+//    public RecyclerViewDataAdapter(Context context, List<String> stringList,RecyclerView recyclerView, int choice) {
 //        this.context = context;
 //    }
 
@@ -50,22 +51,58 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
     @NonNull
     @Override
     public PesticideDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d(TAG, "onCreateViewHolder: ");
         View itemView;
 
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
+//        switch (choice) {
+//            case 2:
+//                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.disease_layout, parent, false);
+//                break;
+//            case 3:
+//                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.active_ingredient_layout, parent, false);
+//                break;
+//            case 4:
+//                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.manufacturer_layout, parent, false);
+//                break;
+//            default:
+//                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pesticide_layout, parent, false);
+//        }
 
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pesticide_layout, parent, false);
         return new PesticideDataViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PesticideDataViewHolder holder, int position) {
+        Log.d(TAG, "onBindViewHolder: ");
         String name = pesticideListFiltered.get(position).getTen();
         if (name.length() > 45) {
             name = name.substring(0, 45) + "...";
         }
-        String nhom = pesticideListFiltered.get(position).getNhom();
-        holder.tvName.setText(name);
-        holder.tvType.setText(nhom);
+
+                switch (choice) {
+            case 2:
+                String doituongphongtru = pesticideListFiltered.get(position).getDoituongphongtru();
+                holder.tvName.setText(name);
+                holder.tvType.setText(doituongphongtru);
+                break;
+            case 3:
+                String hoatchat = pesticideListFiltered.get(position).getHoatchat();
+                holder.tvName.setText(name);
+                holder.tvType.setText(hoatchat);
+                break;
+            case 4:
+                String tochucdangky = pesticideListFiltered.get(position).getTochucdangky();
+                holder.tvName.setText(name);
+                holder.tvType.setText(tochucdangky);
+                break;
+            default:
+                String nhom = pesticideListFiltered.get(position).getNhom();
+                holder.tvName.setText(name);
+                holder.tvType.setText(nhom);
+        }
+
+
         if (pesticideListFiltered.get(position).getIsSaved() == 1) {
             holder.imvSave.setImageResource(R.drawable.ic_star_yellow_24dp);
         } else holder.imvSave.setImageResource(R.drawable.ic_star_white_24dp);
@@ -137,11 +174,11 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                int choice = Integer.parseInt(charSequence.toString().substring(charSequence.length() - 1, charSequence.length()));
+                choice = Integer.parseInt(charSequence.toString().substring(charSequence.length() - 1, charSequence.length()));
                 charSequence = charSequence.toString().substring(0, charSequence.length() - 1);
 
                 String charString = charSequence.toString().trim().replaceAll("\\s+", " ").toLowerCase();
-                Log.d("AllItemsFragment", "performFiltering: " + charString);
+//                Log.d("AllItemsFragment", "performFiltering: " + charString);
 
                 //dung cho tim kiem khong dau
 //                String charStringEng = convertToEng(charSequence.toString()).toLowerCase();
