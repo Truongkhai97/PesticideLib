@@ -28,7 +28,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private boolean mNeedUpdate = false;
     private static DatabaseHelper mInstance;
     private final String TAG = "DatabaseHelper";
-    private  boolean show_stack_trace = false;
+    private boolean show_stack_trace = false;
+
     public static synchronized DatabaseHelper getInstance() {
 
         if (mInstance == null) {
@@ -136,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Pesticide> getAllList() {
-        if(show_stack_trace) Log.d(TAG,"getAllList", new RuntimeException().fillInStackTrace());
+        if (show_stack_trace) Log.d(TAG, "getAllList", new RuntimeException().fillInStackTrace());
         Log.d("Logd", String.valueOf(checkDataBase()));
         List<Pesticide> pesticideList = new ArrayList<>();
         mDataBase = this.getReadableDatabase();
@@ -161,7 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Pesticide> getFavList() {
-        if(show_stack_trace) Log.d(TAG,"getFavList",new RuntimeException().fillInStackTrace());
+        if (show_stack_trace) Log.d(TAG, "getFavList", new RuntimeException().fillInStackTrace());
         List<Pesticide> pesticideList = new ArrayList<>();
         mDataBase = this.getReadableDatabase();
         Cursor cursor = mDataBase.rawQuery("SELECT * FROM thuoc where uathich=1", null);
@@ -185,7 +186,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Pesticide> getSearchedItems(String keyword, int choice) {
-        if(show_stack_trace) Log.d(TAG,   "getSearchedItems", new RuntimeException().fillInStackTrace());
+        if (show_stack_trace)
+            Log.d(TAG, "getSearchedItems", new RuntimeException().fillInStackTrace());
         List<Pesticide> pesticideList = new ArrayList<>();
         mDataBase = this.getReadableDatabase();
         Cursor cursor;
@@ -235,7 +237,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        cursor.close();
     }
 
-    public void updateItem(Pesticide pesticide) {
+    public boolean updateItem(Pesticide pesticide) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", pesticide.getId());
@@ -246,7 +248,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("tochucdangky", pesticide.getTochucdangky());
         String whereClause = "id=?";
         String whereArgs[] = {pesticide.getId().toString()};
-        db.update("thuoc", contentValues, whereClause, whereArgs);
+        return db.update("thuoc", contentValues, whereClause, whereArgs)!=0;
     }
 
     public void deleteItem(Pesticide pesticide) {
@@ -254,6 +256,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String whereClause = "id=?";
         String whereArgs[] = {pesticide.getId().toString()};
         db.delete("thuoc", whereClause, whereArgs);
+    }
+
+    public boolean addItem(Pesticide pesticide) {
+        SQLiteDatabase db = getWritableDatabase();
+        String ROW1 = "INSERT INTO thuoc Values (null,'" + pesticide.getTen() + "','" + pesticide.getHoatchat() + "','" + pesticide.getNhom() + "','" + pesticide.getDoituongphongtru() + "','" + pesticide.getTochucdangky() + "',0)";
+        try {
+            db.execSQL(ROW1);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public String getAllTableNames() {

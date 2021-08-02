@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pesticidelib.R;
 import com.example.pesticidelib.fragments.AboutFragment;
+import com.example.pesticidelib.fragments.AddFragment;
 import com.example.pesticidelib.fragments.AllItemsFragment;
 import com.example.pesticidelib.fragments.SavedItemsFragment;
 import com.example.pesticidelib.fragments.SearchFragment;
@@ -93,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
 //                findViewById(R.id.navigation_search).performClick();
 //                Log.d(TAG, "case 3: ");
 //                break;
+
+            case 3:
+//                loadFragment(new SearchFragment());
+//                bottomNavigationView.setSelectedItemId(R.id.navigation_search);
+                findViewById(R.id.navigation_addPesticide).performClick();
+                Log.d(TAG, "case 3: ");
+                break;
             case 4:
 //                loadFragment(new AboutFragment());
 //                bottomNavigationView.setSelectedItemId(R.id.navigation_about);
@@ -137,6 +145,13 @@ public class MainActivity extends AppCompatActivity {
 //
 //                    currentFragment = 3;
 //                    return true;
+
+                case R.id.navigation_addPesticide:
+                    toolbar.setTitle("Thêm thuốc");
+                    loadFragment(new AddFragment());
+
+                    currentFragment = 3;
+                    return true;
                 case R.id.navigation_about:
                     toolbar.setTitle("Thông tin liên hệ");
                     loadFragment(new AboutFragment());

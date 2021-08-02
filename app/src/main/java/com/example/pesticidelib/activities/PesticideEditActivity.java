@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,6 +78,13 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
         btn_luu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check null
+                if (TextUtils.isEmpty(edt_ten.getText())) {
+                    edt_ten.setError("Tên không được để trống");
+                    edt_ten.requestFocus();
+                    return;
+                }
+
                 //lay du lieu
                 pesticide.setTen(edt_ten.getText().toString());
                 pesticide.setHoatchat(edt_hoatchat.getText().toString());
