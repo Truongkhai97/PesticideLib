@@ -25,7 +25,7 @@ import com.example.pesticidelib.utilities.DatabaseHelper;
 import com.example.pesticidelib.utilities.HideVirtualKeyBoard;
 
 public class PesticideEditActivity extends AppCompatActivity implements HideVirtualKeyBoard {
-    private Pesticide pesticide;
+    private Pesticide oldPesticide = null, pesticide = null;
     private ActionBar actionBar;
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDB;
@@ -63,7 +63,10 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
         mDBHelper = DatabaseHelper.getInstance();
         mDB = mDBHelper.getWritableDatabase();
 
-        pesticide = (Pesticide) getIntent().getSerializableExtra("pesticide");
+        oldPesticide = (Pesticide) getIntent().getSerializableExtra("pesticide");
+        //2 bien cung tro den 1 dia chi object nen gan nhu la 1, dieu nay gay ra loi
+//        pesticide = (Pesticide) getIntent().getSerializableExtra("pesticide");
+        pesticide = new Pesticide(oldPesticide.getId(), oldPesticide.getTen(), oldPesticide.getHoatchat(), oldPesticide.getNhom(), oldPesticide.getDoituongphongtru(), oldPesticide.getTochucdangky(), oldPesticide.getIsSaved());
 
         edt_ten.setText(pesticide.getTen());
 
@@ -93,17 +96,20 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
                 pesticide.setTochucdangky(edt_tochucdangky.getText().toString());
 
                 //tien hanh update
-                mDBHelper.updateItem(pesticide);
+                if (mDBHelper.updateItem(pesticide)) {
 
-                //quay lai giao dien truoc
+                    //quay lai giao dien truoc
 //                onBackPressed();
-                Intent intent = new Intent(getApplicationContext(), PesticideInfoActivity.class);
-                intent.putExtra("pesticide", pesticide);
-//                intent.putExtra("tab", MainActivity.getCurrentFragment());
-                startActivity(intent);
-                finish();
-                //thong bao da luu lai
-                Toast.makeText(getApplicationContext(), "Đã lưu lại", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), PesticideInfoActivity.class);
+                    intent.putExtra("pesticide", pesticide);
+                    startActivity(intent);
+                    finish();
+                    //thong bao da luu lai
+                    Toast.makeText(getApplicationContext(), "Đã lưu lại", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Thất bại, tên có thể đã tồn tại", Toast.LENGTH_LONG).show();
+                    edt_ten.requestFocus();
+                }
             }
         });
     }
@@ -121,7 +127,7 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), PesticideInfoActivity.class);
-        intent.putExtra("pesticide", pesticide);
+        intent.putExtra("pesticide", oldPesticide);
         startActivity(intent);
         finish();
     }

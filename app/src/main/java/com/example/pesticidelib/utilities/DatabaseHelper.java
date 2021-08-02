@@ -263,7 +263,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("tochucdangky", pesticide.getTochucdangky());
         String whereClause = "id=?";
         String whereArgs[] = {pesticide.getId().toString()};
-        return db.update("thuoc", contentValues, whereClause, whereArgs) != 0;
+        try {
+            db.update("thuoc", contentValues, whereClause, whereArgs);
+            return true;
+        }
+        catch (SQLException e){
+            return false;
+        }
     }
 
 

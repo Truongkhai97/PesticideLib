@@ -12,12 +12,15 @@ public class Pesticide implements Serializable {
     private Integer isSaved;
 
     //phuc vu cho tim kiem khong dau
-    private String ten_eng;
-    private String hoatchat_eng;
-    private String nhom_eng;
-    private String doituongphongtru_eng;
-    private String tochucdangky_eng;
+//    private String ten_eng;
+//    private String hoatchat_eng;
+//    private String nhom_eng;
+//    private String doituongphongtru_eng;
+//    private String tochucdangky_eng;
 
+
+    public Pesticide() {
+    }
 
     public Pesticide(Integer id, String ten, String hoatchat, String nhom, String doituongphongtru, String tochucdangky, Integer isSaved) {
         this.id = id;
