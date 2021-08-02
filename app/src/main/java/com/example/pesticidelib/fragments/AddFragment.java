@@ -102,17 +102,20 @@ public class AddFragment extends Fragment {
                 if (mDBHelper.addItem(pesticide) == true) {
                     //thong bao da them
                     Toast.makeText(view.getContext(), "Đã thêm", Toast.LENGTH_LONG).show();
+                    //reset du lieu
+                    pesticide = null;
+                    edt_themten.setText("");
+                    edt_themhoatchat.setText("");
+                    edt_themnhom.setText("");
+                    edt_themdoituongphongtru.setText("");
+                    edt_themtochucdangky.setText("");
                 } else
+                {
                     Toast.makeText(view.getContext(), "Thêm không thành công", Toast.LENGTH_LONG).show();
+                    edt_themten.setError("Tên có thể đã tồn tại");
+                    edt_themten.requestFocus();
+                }
 
-
-                //reset du lieu
-                pesticide = null;
-                edt_themten.setText("");
-                edt_themhoatchat.setText("");
-                edt_themnhom.setText("");
-                edt_themdoituongphongtru.setText("");
-                edt_themtochucdangky.setText("");
 
 //                //quay lai giao dien truoc
 ////                onBackPressed();

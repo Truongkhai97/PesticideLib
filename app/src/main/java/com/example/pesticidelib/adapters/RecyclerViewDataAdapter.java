@@ -36,6 +36,10 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         this.pesticideListFiltered = pesticideList;
     }
 
+//    public RecyclerViewDataAdapter(Context context, List<String> stringList, int choice) {
+//        this.context = context;
+//    }
+
     public RecyclerViewDataAdapter(Context context, List<Pesticide> pesticideList, RecyclerView recyclerView) {
         this.context = context;
         this.pesticideList = pesticideList;

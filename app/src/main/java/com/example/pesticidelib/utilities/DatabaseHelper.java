@@ -185,6 +185,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return pesticideList;
     }
 
+    public List<String> getAllManufacturer() {
+        List<String> manufacturerList = new ArrayList<>();
+        mDataBase = this.getReadableDatabase();
+        Cursor cursor = mDataBase.rawQuery("SELECT DISTINCT tochucdangky FROM thuoc", null);
+
+        //chuyen den dong dau cua du lieu
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            manufacturerList.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return manufacturerList;
+    }
+
     public List<Pesticide> getSearchedItems(String keyword, int choice) {
         if (show_stack_trace)
             Log.d(TAG, "getSearchedItems", new RuntimeException().fillInStackTrace());
@@ -248,8 +263,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("tochucdangky", pesticide.getTochucdangky());
         String whereClause = "id=?";
         String whereArgs[] = {pesticide.getId().toString()};
-        return db.update("thuoc", contentValues, whereClause, whereArgs)!=0;
+        return db.update("thuoc", contentValues, whereClause, whereArgs) != 0;
     }
+
 
     public void deleteItem(Pesticide pesticide) {
         SQLiteDatabase db = getWritableDatabase();

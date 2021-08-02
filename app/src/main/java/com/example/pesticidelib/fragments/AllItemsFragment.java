@@ -86,6 +86,7 @@ public class AllItemsFragment extends Fragment {
         adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
 
         rv_items.setAdapter(adapter);
+
         //su dung assynctask
 //        GetAllItemsAsynctask getAllItemsAsynctask=new GetAllItemsAsynctask(mDBHelper, adapter, rv_items);
 //        getAllItemsAsynctask.execute();
@@ -185,7 +186,7 @@ public class AllItemsFragment extends Fragment {
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
                 choice = 2;
-                searchView.setQueryHint("Tên bệnh");
+                searchView.setQueryHint("Tên bệnh hoặc loại cây");
 
                 break;
             case R.id.option_search_by_active_ingredient:

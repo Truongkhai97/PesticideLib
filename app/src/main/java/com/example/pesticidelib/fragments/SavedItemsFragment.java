@@ -50,7 +50,7 @@ public class SavedItemsFragment extends Fragment {
         }
 //        Log.d("logd", "AllItemsFragment-onCreate-count: " + mDBHelper.count());
 
-        pesticideList = mDBHelper.getFavList();
+//        pesticideList = mDBHelper.getFavList();
 //        for (Pesticide pesticide : pesticideList) {
 //            Log.d("logd", pesticide.toString());
 //        }
@@ -82,6 +82,7 @@ public class SavedItemsFragment extends Fragment {
         rv_fav_items.setLayoutManager(linearLayoutManager);
         rv_fav_items.setHasFixedSize(true);
 //        RecyclerViewDataAdapter adapter=new RecyclerViewDataAdapter(this.getContext(), pesticideList);
+        pesticideList=mDBHelper.getFavList();
         rv_fav_items.setAdapter(new RecyclerViewDataAdapter(this.getContext(), pesticideList));
     }
 
