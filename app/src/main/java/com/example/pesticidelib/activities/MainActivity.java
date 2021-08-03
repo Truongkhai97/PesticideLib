@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pesticidelib.R;
 import com.example.pesticidelib.fragments.AboutFragment;
+import com.example.pesticidelib.fragments.AboutUsFragment;
 import com.example.pesticidelib.fragments.AddFragment;
 import com.example.pesticidelib.fragments.AllItemsFragment;
 import com.example.pesticidelib.fragments.SavedItemsFragment;
@@ -153,8 +154,8 @@ public class MainActivity extends AppCompatActivity {
                     currentFragment = 3;
                     return true;
                 case R.id.navigation_about:
-                    toolbar.setTitle("Thông tin liên hệ");
-                    loadFragment(new AboutFragment());
+                    toolbar.setTitle("Thông tin ứng dụng");
+                    loadFragment(new AboutUsFragment());
                     currentFragment = 4;
                     return true;
             }

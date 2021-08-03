@@ -3,6 +3,7 @@ package com.example.pesticidelib.fragments;
 import android.annotation.SuppressLint;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,6 +71,7 @@ public class AllItemsFragment extends Fragment {
         Log.d("logd", "AllItemsFragment-onCreate-count: " + mDBHelper.count());
 
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -146,6 +150,10 @@ public class AllItemsFragment extends Fragment {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
         }
+
+//        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+//                Drawable drawable = ContextCompat.getDrawable(getContext(),R.drawable.filter);
+//        actionbar.setOverflowIcon(drawable);
 
         MenuItem itemSearchView = menu.findItem(R.id.action_search);
         searchView = (SearchView) itemSearchView.getActionView();
