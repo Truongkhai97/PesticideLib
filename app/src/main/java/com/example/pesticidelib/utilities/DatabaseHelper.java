@@ -148,13 +148,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
             String ten = cursor.getString(1);
-            String hoatchat = cursor.getString(2);
-            String nhom = cursor.getString(3);
-            String doituongphongtru = cursor.getString(4);
-            String tochucdangky = cursor.getString(5);
-            int isSaved = cursor.getInt(6);
+            String ten_ascii = cursor.getString(2);
+            String hoatchat = cursor.getString(3);
+            String nhom = cursor.getString(4);
+            String doituongphongtru = cursor.getString(5);
+            String doituongphongtru_ascii = cursor.getString(6);
+            String tochucdangky = cursor.getString(7);
+            String tochucdangky_ascii = cursor.getString(8);
+            int isSaved = cursor.getInt(9);
 
-            pesticideList.add(new Pesticide(id, ten, hoatchat, nhom, doituongphongtru, tochucdangky, isSaved));
+            pesticideList.add(new Pesticide(id, ten, ten_ascii, hoatchat, nhom, doituongphongtru, doituongphongtru_ascii, tochucdangky, tochucdangky_ascii, isSaved));
             cursor.moveToNext();
         }
         cursor.close();
@@ -172,13 +175,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
             String ten = cursor.getString(1);
-            String hoatchat = cursor.getString(2);
-            String nhom = cursor.getString(3);
-            String doituongphongtru = cursor.getString(4);
-            String tochucdangky = cursor.getString(5);
-            int isSaved = cursor.getInt(6);
+            String ten_ascii = cursor.getString(2);
+            String hoatchat = cursor.getString(3);
+            String nhom = cursor.getString(4);
+            String doituongphongtru = cursor.getString(5);
+            String doituongphongtru_ascii = cursor.getString(6);
+            String tochucdangky = cursor.getString(7);
+            String tochucdangky_ascii = cursor.getString(8);
+            int isSaved = cursor.getInt(9);
 
-            pesticideList.add(new Pesticide(id, ten, hoatchat, nhom, doituongphongtru, tochucdangky, isSaved));
+            pesticideList.add(new Pesticide(id, ten, ten_ascii, hoatchat, nhom, doituongphongtru, doituongphongtru_ascii, tochucdangky, tochucdangky_ascii, isSaved));
             cursor.moveToNext();
         }
         cursor.close();
@@ -231,13 +237,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
             String ten = cursor.getString(1);
-            String hoatchat = cursor.getString(2);
-            String nhom = cursor.getString(3);
-            String doituongphongtru = cursor.getString(4);
-            String tochucdangky = cursor.getString(5);
-            int isSaved = cursor.getInt(6);
+            String ten_ascii = cursor.getString(2);
+            String hoatchat = cursor.getString(3);
+            String nhom = cursor.getString(4);
+            String doituongphongtru = cursor.getString(5);
+            String doituongphongtru_ascii = cursor.getString(6);
+            String tochucdangky = cursor.getString(7);
+            String tochucdangky_ascii = cursor.getString(8);
+            int isSaved = cursor.getInt(9);
 
-            pesticideList.add(new Pesticide(id, ten, hoatchat, nhom, doituongphongtru, tochucdangky, isSaved));
+            pesticideList.add(new Pesticide(id, ten,ten_ascii, hoatchat, nhom, doituongphongtru,doituongphongtru_ascii, tochucdangky,tochucdangky_ascii, isSaved));
             cursor.moveToNext();
         }
         cursor.close();
@@ -257,17 +266,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", pesticide.getId());
         contentValues.put("ten", pesticide.getTen());
+        contentValues.put("ten_ascii",pesticide.getTen_ascii());
         contentValues.put("hoatchat", pesticide.getHoatchat());
         contentValues.put("nhom", pesticide.getNhom());
         contentValues.put("doituongphongtru", pesticide.getDoituongphongtru());
+        contentValues.put("doituongphongtru_ascii", pesticide.getDoituongphongtru_ascii());
         contentValues.put("tochucdangky", pesticide.getTochucdangky());
+        contentValues.put("tochucdangky_ascii", pesticide.getTochucdangky_ascii());
         String whereClause = "id=?";
         String whereArgs[] = {pesticide.getId().toString()};
         try {
             db.update("thuoc", contentValues, whereClause, whereArgs);
             return true;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             return false;
         }
     }
@@ -282,7 +293,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean addItem(Pesticide pesticide) {
         SQLiteDatabase db = getWritableDatabase();
-        String ROW1 = "INSERT INTO thuoc Values (null,'" + pesticide.getTen() + "','" + pesticide.getHoatchat() + "','" + pesticide.getNhom() + "','" + pesticide.getDoituongphongtru() + "','" + pesticide.getTochucdangky() + "',0)";
+        String ROW1 = "INSERT INTO thuoc Values (null,'" + pesticide.getTen() + "','"  + pesticide.getTen_ascii() + "','" + pesticide.getHoatchat() + "','" + pesticide.getNhom() + "','" + pesticide.getDoituongphongtru() + "','" + pesticide.getDoituongphongtru_ascii() + "','" + pesticide.getTochucdangky() + "','"+ pesticide.getTochucdangky_ascii() + "',0)";
         try {
             db.execSQL(ROW1);
             return true;

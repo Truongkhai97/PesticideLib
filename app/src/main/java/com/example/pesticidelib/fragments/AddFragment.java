@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.pesticidelib.R;
 import com.example.pesticidelib.activities.PesticideInfoActivity;
 import com.example.pesticidelib.models.Pesticide;
+import com.example.pesticidelib.utilities.ConvertToEng;
 import com.example.pesticidelib.utilities.DatabaseHelper;
 
 /**
@@ -28,7 +29,7 @@ import com.example.pesticidelib.utilities.DatabaseHelper;
  * Use the {@link AddFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddFragment extends Fragment {
+public class AddFragment extends Fragment implements ConvertToEng {
     private Pesticide pesticide;
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDB;
@@ -91,7 +92,7 @@ public class AddFragment extends Fragment {
                 }
 
                 //lay du lieu
-                pesticide = new Pesticide(null, edt_themten.getText().toString(), edt_themhoatchat.getText().toString(), edt_themnhom.getText().toString(), edt_themdoituongphongtru.getText().toString(), edt_themtochucdangky.getText().toString(), 0);
+                pesticide = new Pesticide(null, edt_themten.getText().toString(), convertToEng(edt_themten.getText().toString()), edt_themhoatchat.getText().toString(), edt_themnhom.getText().toString(), edt_themdoituongphongtru.getText().toString(), convertToEng(edt_themdoituongphongtru.getText().toString()), edt_themtochucdangky.getText().toString(), convertToEng(edt_themtochucdangky.getText().toString()), 0);
 //                pesticide.setTen(edt_themten.getText().toString());
 //                pesticide.setHoatchat(edt_themhoatchat.getText().toString());
 //                pesticide.setNhom(edt_themnhom.getText().toString());
@@ -109,8 +110,7 @@ public class AddFragment extends Fragment {
                     edt_themnhom.setText("");
                     edt_themdoituongphongtru.setText("");
                     edt_themtochucdangky.setText("");
-                } else
-                {
+                } else {
                     Toast.makeText(view.getContext(), "Thêm không thành công", Toast.LENGTH_LONG).show();
                     edt_themten.setError("Tên có thể đã tồn tại");
                     edt_themten.requestFocus();

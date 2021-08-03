@@ -21,10 +21,11 @@ import android.widget.Toast;
 
 import com.example.pesticidelib.R;
 import com.example.pesticidelib.models.Pesticide;
+import com.example.pesticidelib.utilities.ConvertToEng;
 import com.example.pesticidelib.utilities.DatabaseHelper;
 import com.example.pesticidelib.utilities.HideVirtualKeyBoard;
 
-public class PesticideEditActivity extends AppCompatActivity implements HideVirtualKeyBoard {
+public class PesticideEditActivity extends AppCompatActivity implements HideVirtualKeyBoard, ConvertToEng {
     private Pesticide oldPesticide = null, pesticide = null;
     private ActionBar actionBar;
     private DatabaseHelper mDBHelper;
@@ -66,7 +67,7 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
         oldPesticide = (Pesticide) getIntent().getSerializableExtra("pesticide");
         //2 bien cung tro den 1 dia chi object nen gan nhu la 1, dieu nay gay ra loi
 //        pesticide = (Pesticide) getIntent().getSerializableExtra("pesticide");
-        pesticide = new Pesticide(oldPesticide.getId(), oldPesticide.getTen(), oldPesticide.getHoatchat(), oldPesticide.getNhom(), oldPesticide.getDoituongphongtru(), oldPesticide.getTochucdangky(), oldPesticide.getIsSaved());
+        pesticide = new Pesticide(oldPesticide.getId(), oldPesticide.getTen(), oldPesticide.getTen_ascii(), oldPesticide.getHoatchat(), oldPesticide.getNhom(), oldPesticide.getDoituongphongtru(),oldPesticide.getDoituongphongtru_ascii(), oldPesticide.getTochucdangky(),oldPesticide.getTochucdangky_ascii(), oldPesticide.getIsSaved());
 
         edt_ten.setText(pesticide.getTen());
 
@@ -90,10 +91,13 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
 
                 //lay du lieu
                 pesticide.setTen(edt_ten.getText().toString());
+                pesticide.setTen_ascii(convertToEng(edt_ten.getText().toString()));
                 pesticide.setHoatchat(edt_hoatchat.getText().toString());
                 pesticide.setNhom(edt_nhom.getText().toString());
                 pesticide.setDoituongphongtru(edt_doituongphongtru.getText().toString());
+                pesticide.setDoituongphongtru_ascii(convertToEng(edt_doituongphongtru.getText().toString()));
                 pesticide.setTochucdangky(edt_tochucdangky.getText().toString());
+                pesticide.setTochucdangky_ascii(convertToEng(edt_tochucdangky.getText().toString()));
 
                 //tien hanh update
                 if (mDBHelper.updateItem(pesticide)) {
@@ -138,4 +142,24 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
         inputMethodManager.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
 //        Log.d(TAG, "hideKeyboard: called");
     }
+
+    //ham ho tro chuyen doi sang khong dau
+//    public String convertToEng(String str) {
+//        str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
+//        str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
+//        str = str.replaceAll("ì|í|ị|ỉ|ĩ", "i");
+//        str = str.replaceAll("ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ", "o");
+//        str = str.replaceAll("ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ", "u");
+//        str = str.replaceAll("ỳ|ý|ỵ|ỷ|ỹ", "y");
+//        str = str.replaceAll("đ", "d");
+//
+//        str = str.replaceAll("À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ", "A");
+//        str = str.replaceAll("È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ", "E");
+//        str = str.replaceAll("Ì|Í|Ị|Ỉ|Ĩ", "I");
+//        str = str.replaceAll("Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ", "O");
+//        str = str.replaceAll("Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ", "U");
+//        str = str.replaceAll("Ỳ|Ý|Ỵ|Ỷ|Ỹ", "Y");
+//        str = str.replaceAll("Đ", "D");
+//        return str;
+//    }
 }

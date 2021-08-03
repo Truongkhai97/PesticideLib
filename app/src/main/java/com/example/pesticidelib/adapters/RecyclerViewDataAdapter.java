@@ -18,11 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pesticidelib.R;
 import com.example.pesticidelib.activities.PesticideInfoActivity;
 import com.example.pesticidelib.models.Pesticide;
+import com.example.pesticidelib.utilities.ConvertToEng;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.PesticideDataViewHolder> implements Filterable {
+public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.PesticideDataViewHolder> implements Filterable, ConvertToEng {
     private List<Pesticide> pesticideList;
     private Context context;
     private final String TAG = "RecyclerViewDataAdapter";
@@ -181,7 +182,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 //                Log.d("AllItemsFragment", "performFiltering: " + charString);
 
                 //dung cho tim kiem khong dau
-//                String charStringEng = convertToEng(charSequence.toString()).toLowerCase();
+                String charString_ascii = convertToEng(charSequence.toString());
                 List<Pesticide> filteredList;
                 FilterResults filterResults = new FilterResults();
                 if (charString.isEmpty()) {
@@ -193,7 +194,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                         case 2:
                             for (Pesticide row : pesticideList) {
 //                                if (convertToEng(row.getDoituongphongtru()).toLowerCase().contains(charStringEng.toLowerCase())) {
-                                if (row.getDoituongphongtru().toLowerCase().contains(charString)) {
+                                if (row.getDoituongphongtru_ascii().toLowerCase().contains(charString_ascii)) {
                                     filteredList.add(row);
                                 }
                             }
@@ -202,7 +203,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                             for (Pesticide row : pesticideList) {
 //                                if (row.getHoatchat().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
 //                                if (convertToEng(row.getHoatchat()).toLowerCase().contains(charStringEng.toLowerCase())) {
-                                if (row.getHoatchat().toLowerCase().contains(charString)) {
+                                if (row.getHoatchat().toLowerCase().contains(charString_ascii)) {
                                     filteredList.add(row);
                                 }
                             }
@@ -211,7 +212,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                             for (Pesticide row : pesticideList) {
 //                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
 //                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
-                                if (row.getTochucdangky().toLowerCase().contains(charString)) {
+                                if (row.getTochucdangky_ascii().toLowerCase().contains(charString_ascii)) {
                                     filteredList.add(row);
                                 }
                             }
@@ -220,7 +221,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                             for (Pesticide row : pesticideList) {
 //                                if (row.getTen().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
 //                                if (convertToEng(row.getTen()).toLowerCase().contains(charStringEng.toLowerCase())) {
-                                if (row.getTen().toLowerCase().contains(charString)) {
+                                if (row.getTen_ascii().toLowerCase().contains(charString_ascii)) {
                                     filteredList.add(row);
 //                                    Log.d(TAG, "performFiltering: added");
                                 }
@@ -249,6 +250,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
     }
 
+//    //ham ho tro tim kiem khong dau
 //    public String convertToEng(String str) {
 //        str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
 //        str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
