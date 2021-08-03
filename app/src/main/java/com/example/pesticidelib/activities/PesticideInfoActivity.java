@@ -2,9 +2,11 @@ package com.example.pesticidelib.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -93,25 +95,56 @@ public class PesticideInfoActivity extends AppCompatActivity {
                 break;
             case R.id.delete_icon:
 
-                Toast.makeText(this, "Đã xóa", Toast.LENGTH_LONG).show();
-                //tien hanh xoa
-                mDBHelper.deleteItem(pesticide);
-                onBackPressed();
-                //onBackPressed+Toast
+                new AlertDialog.Builder(this)
+                        .setTitle("Xóa thuốc")
+                        .setMessage("Bạn có chắc chắn muốn xóa?")
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //OK
+                                Toast.makeText(getApplicationContext(), "Đã xóa", Toast.LENGTH_LONG).show();
+                                //tien hanh xoa
+                                mDBHelper.deleteItem(pesticide);
+                                //onBackPressed+Toast
+                                onBackPressed();
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(R.drawable.delete)
+                        .show();
 
                 break;
             case R.id.edit_icon:
 
-//                Toast.makeText(this, "edit", Toast.LENGTH_SHORT).show();
-                //intent toi activity moi co giao dien sua thong tin
-                Intent intent = new Intent(this, PesticideEditActivity.class);
-                intent.putExtra("pesticide", pesticide);
-                startActivity(intent);
-                finish();
+                new AlertDialog.Builder(this)
+                        .setTitle("Sửa thông tin")
+                        .setMessage("Thông tin đưa vào có thể chưa được kiểm định, bạn có muốn tiến tiếp tục?")
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //OK
+                                //intent toi activity moi co giao dien sua thong tin
+                                Intent intent = new Intent(getApplicationContext(), PesticideEditActivity.class);
+                                intent.putExtra("pesticide", pesticide);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(R.drawable.edit)
+                        .show();
                 break;
             default:
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

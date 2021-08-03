@@ -1,11 +1,13 @@
 package com.example.pesticidelib.fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
@@ -19,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.pesticidelib.R;
+import com.example.pesticidelib.activities.PesticideEditActivity;
 import com.example.pesticidelib.activities.PesticideInfoActivity;
 import com.example.pesticidelib.models.Pesticide;
 import com.example.pesticidelib.utilities.ConvertToEng;
@@ -84,37 +87,57 @@ public class AddFragment extends Fragment implements ConvertToEng {
         btn_them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //check null
                 if (TextUtils.isEmpty(edt_themten.getText())) {
                     edt_themten.setError("Tên không được để trống");
                     edt_themten.requestFocus();
                     return;
+                } else if (TextUtils.isEmpty(edt_themnhom.getText())) {
+                    edt_themnhom.setError("Nhóm không được để trống");
+                    edt_themnhom.requestFocus();
+                    return;
+
+                } else if (TextUtils.isEmpty(edt_themdoituongphongtru.getText())) {
+                    edt_themdoituongphongtru.setError("Đối tượng phòng trừ không được để trống");
+                    edt_themdoituongphongtru.requestFocus();
+                    return;
                 }
 
                 //lay du lieu
                 pesticide = new Pesticide(null, edt_themten.getText().toString(), convertToEng(edt_themten.getText().toString()), edt_themhoatchat.getText().toString(), edt_themnhom.getText().toString(), edt_themdoituongphongtru.getText().toString(), convertToEng(edt_themdoituongphongtru.getText().toString()), edt_themtochucdangky.getText().toString(), convertToEng(edt_themtochucdangky.getText().toString()), 0);
-//                pesticide.setTen(edt_themten.getText().toString());
-//                pesticide.setHoatchat(edt_themhoatchat.getText().toString());
-//                pesticide.setNhom(edt_themnhom.getText().toString());
-//                pesticide.setDoituongphongtru(edt_themdoituongphongtru.getText().toString());
-//                pesticide.setTochucdangky(edt_themtochucdangky.getText().toString());
 
-                //tien hanh insert
-                if (mDBHelper.addItem(pesticide) == true) {
-                    //thong bao da them
-                    Toast.makeText(view.getContext(), "Đã thêm", Toast.LENGTH_LONG).show();
-                    //reset du lieu
-                    pesticide = null;
-                    edt_themten.setText("");
-                    edt_themhoatchat.setText("");
-                    edt_themnhom.setText("");
-                    edt_themdoituongphongtru.setText("");
-                    edt_themtochucdangky.setText("");
-                } else {
-                    Toast.makeText(view.getContext(), "Thêm không thành công", Toast.LENGTH_LONG).show();
-                    edt_themten.setError("Tên có thể đã tồn tại");
-                    edt_themten.requestFocus();
-                }
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Thêm thuốc")
+                        .setMessage("Thông tin đưa vào có thể chưa được kiểm định, bạn có muốn tiến tiếp tục?")
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //OK
+                                //tien hanh insert
+                                if (mDBHelper.addItem(pesticide) == true) {
+                                    //thong bao da them
+                                    Toast.makeText(view.getContext(), "Đã thêm", Toast.LENGTH_LONG).show();
+                                    //reset du lieu
+                                    pesticide = null;
+                                    edt_themten.setText("");
+                                    edt_themhoatchat.setText("");
+                                    edt_themnhom.setText("");
+                                    edt_themdoituongphongtru.setText("");
+                                    edt_themtochucdangky.setText("");
+                                } else {
+                                    Toast.makeText(view.getContext(), "Thêm không thành công, tên có thể đã tồn tại", Toast.LENGTH_LONG).show();
+//                                    edt_themten.setError("Tên có thể đã tồn tại");
+                                    edt_themten.requestFocus();
+                                }
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
 
 
 //                //quay lai giao dien truoc

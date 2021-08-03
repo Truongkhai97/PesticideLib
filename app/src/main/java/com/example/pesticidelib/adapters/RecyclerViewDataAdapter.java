@@ -52,7 +52,6 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
     @NonNull
     @Override
     public PesticideDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder: ");
         View itemView;
 
 //        switch (choice) {
@@ -75,7 +74,6 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
     @Override
     public void onBindViewHolder(@NonNull PesticideDataViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: ");
         String name = pesticideListFiltered.get(position).getTen();
         if (name.length() > 45) {
             name = name.substring(0, 45) + "...";
@@ -182,7 +180,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 //                Log.d("AllItemsFragment", "performFiltering: " + charString);
 
                 //dung cho tim kiem khong dau
-                String charString_ascii = convertToEng(charSequence.toString());
+                String charString_ascii = convertToEng(charString.toString());
                 List<Pesticide> filteredList;
                 FilterResults filterResults = new FilterResults();
                 if (charString.isEmpty()) {
@@ -196,7 +194,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 //                                if (convertToEng(row.getDoituongphongtru()).toLowerCase().contains(charStringEng.toLowerCase())) {
                                 if (row.getDoituongphongtru_ascii().toLowerCase().contains(charString_ascii)) {
                                     filteredList.add(row);
-                                }
+                                                                    }
                             }
                             break;
                         case 3:

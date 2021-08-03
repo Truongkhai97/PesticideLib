@@ -87,6 +87,15 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
                     edt_ten.setError("Tên không được để trống");
                     edt_ten.requestFocus();
                     return;
+                } else if (TextUtils.isEmpty(edt_nhom.getText())) {
+                    edt_nhom.setError("Nhóm không được để trống");
+                    edt_nhom.requestFocus();
+                    return;
+
+                } else if (TextUtils.isEmpty(edt_doituongphongtru.getText())) {
+                    edt_doituongphongtru.setError("Đối tượng phòng trừ không được để trống");
+                    edt_doituongphongtru.requestFocus();
+                    return;
                 }
 
                 //lay du lieu
