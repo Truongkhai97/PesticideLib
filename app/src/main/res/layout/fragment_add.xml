@@ -37,10 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
-                android:background="#DCEFFF"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="14sp" />
+<!--            android:background="#DCEFFF"-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,7 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
-                android:background="#DCEFFF"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="14sp" />
@@ -75,7 +74,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
-                android:background="#DCEFFF"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="14sp" />
@@ -94,7 +92,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginBottom="20dp"
-                android:background="#DCEFFF"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
@@ -114,7 +111,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:height="150dp"
-                android:background="#DCEFFF"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
