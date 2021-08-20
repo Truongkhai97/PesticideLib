@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
     tools:context=".fragments.AboutUsFragment">
 
     <LinearLayout
@@ -16,13 +17,13 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:src="@drawable/logo" />
-<!--        android:layout_marginTop="30dp"-->
+        <!--        android:layout_marginTop="30dp"-->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Phần mềm tra cứu Thuốc Bảo Vệ Thực Vật, là chương trình minh họa của khóa luận tốt nghiệp. Phát triển bởi sinh viên Trương Văn Khải, được hướng dẫn bởi TS.Trần Vũ Hà, giảng viên khoa Công nghệ Thông tin, Học Viện Nông nghiệp Viêt Nam"
+            android:layout_marginTop="0dp"
+            android:text="Phần mềm tra cứu Thuốc Bảo Vệ Thực Vật, là chương trình minh họa của khóa luận tốt nghiệp. Phát triển bởi sinh viên Trương Văn Khải, được hướng dẫn bởi TS.Trần Vũ Hà, giảng viên khoa Công nghệ Thông tin, Học Viện Nông nghiệp Việt Nam"
             android:textColor="@color/Blue"
             android:textSize="15dp" />
 

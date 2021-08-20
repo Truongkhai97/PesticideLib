@@ -5,10 +5,12 @@
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
-    android:layout_marginBottom="5dp"
-    android:background="#DFDFDF"
+    android:layout_marginBottom="7dp"
+    android:background="#BCD3EA"
     android:orientation="horizontal">
 <!--    android:background="#DFDFDF"-->
+<!--    android:background="#C7E2FD"-->
+<!--    android:background="#BCD3EA"-->
 
 
     <LinearLayout

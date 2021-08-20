@@ -31,10 +31,11 @@
         android:layout_gravity="bottom"
         android:background="@color/bgBottomNavigation"
         android:foreground="?attr/selectableItemBackground"
-        app:itemBackground="@color/bgBottomNavigation"
+        app:itemBackground="@color/ForestGreen"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/navigation" />
+<!--    app:itemBackground="@color/bgBottomNavigation"-->
     <!--    android:background="?android:attr/windowBackground"-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
