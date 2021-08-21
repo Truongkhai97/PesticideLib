@@ -16,7 +16,7 @@
             android:id="@+id/tv_ten"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/Tomato"
+            android:textColor="@color/Red"
             android:textSize="30dp" />
 
         <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nhóm: "
-                android:textColor="@color/Green"
+                android:textColor="@color/ForestGreen"
                 android:textSize="20dp" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hoạt chất: "
-                android:textColor="@color/Green"
+                android:textColor="@color/ForestGreen"
                 android:textSize="20dp" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tổ chức đăng ký: "
-                android:textColor="@color/Green"
+                android:textColor="@color/ForestGreen"
                 android:textSize="20dp" />
 
             <TextView
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phòng trừ: "
-                android:textColor="@color/Green"
+                android:textColor="@color/ForestGreen"
                 android:textSize="20dp" />
 
             <TextView

@@ -19,15 +19,19 @@
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/drawable/ic_event_white_24dp.xml" value="0.14635416666666667" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/drawable/ic_expand_less_white_24dp.xml" value="0.14635416666666667" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/drawable/ic_favorite_border_white_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/drawable/rect_border.xml" value="0.2703125" />
+        <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/drawable/splash_screen.xml" value="0.2703125" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/active_ingredient_layout.xml" value="0.13020833333333334" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/activity_pesticide_edit.xml" value="0.13020833333333334" />
+        <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/activity_pesticide_info.xml" value="0.25416666666666665" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/fragment_about_us.xml" value="0.176" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/fragment_add.xml" value="0.2" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/fragment_all_items.xml" value="0.13020833333333334" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/fragment_search.xml" value="0.13020833333333334" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/layout.xml" value="0.13020833333333334" />
-        <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/pesticide_layout.xml" value="0.13020833333333334" />
+        <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/layout/pesticide_layout.xml" value="0.2" />
+        <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/menu/all_items_menu.xml" value="0.13020833333333334" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/menu/navigation.xml" value="0.13020833333333334" />
         <entry key="..\:/Android_STD/PesticideLib/app/src/main/res/menu/pesticide_infor_menu.xml" value="0.13020833333333334" />
       </map>

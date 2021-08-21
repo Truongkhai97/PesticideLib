@@ -156,6 +156,7 @@ public class AllItemsFragment extends Fragment {
 //        actionbar.setOverflowIcon(drawable);
 
         MenuItem itemSearchView = menu.findItem(R.id.action_search);
+        menu.getItem(1).setChecked(true);
         searchView = (SearchView) itemSearchView.getActionView();
         searchView.setQueryHint("Tên thuốc");
 

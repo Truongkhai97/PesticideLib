@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,6 +43,7 @@ public class PesticideEditActivity extends AppCompatActivity implements HideVirt
         actionBar = getSupportActionBar();
         actionBar.setTitle("Sửa thông tin thuốc");
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#228B22")));
 
         EditText edt_ten = findViewById(R.id.edt_ten);
         EditText edt_hoatchat = findViewById(R.id.edt_hoatchat);

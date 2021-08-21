@@ -1,51 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
-    android:layout_marginBottom="7dp"
-    android:background="#BCD3EA"
-    android:orientation="horizontal">
-<!--    android:background="#DFDFDF"-->
-<!--    android:background="#C7E2FD"-->
-<!--    android:background="#BCD3EA"-->
-
+    android:layout_marginBottom="8dp"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
-        android:id="@+id/ll_pesticide_inf"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="9"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <!--    android:background="#DFDFDF"-->
+        <!--    android:background="#C7E2FD"-->
+        <!--    android:background="#BCD3EA"-->
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_pesticide_inf"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:layout_weight="9"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_type"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Red"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textColor="#555555"
+                android:textSize="20dp" />
+<!--            android:textColor="#424141"-->
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imv_save"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/Tomato"
-            android:textSize="20dp" />
-        <!--            android:textColor="@color/Tomato" />-->
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_star_white_24dp_black_border" />
+<!--        android:src="@drawable/ic_star_white_24dp"-->
+
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imv_save"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_weight="1"
-        android:src="@drawable/ic_star_white_24dp" />
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

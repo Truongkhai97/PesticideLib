@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
 //        setSupportActionBar(toolbar);
         toolbar = getSupportActionBar();
 //        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-        toolbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#228B22")));
-//        toolbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(String.valueOf(R.color.ForestGreen))));
+//        toolbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#228B22")));
+        toolbar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.ForestGreen)));
 //        toolbar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
 //        toolbar.setBackgroundColor(Color.DKGRAY);
 

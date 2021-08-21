@@ -110,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:height="150dp"
+                android:height="125dp"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="150dp"
-                android:background="@color/colorPrimary"
+                android:backgroundTint="@color/ForestGreen"
                 android:paddingLeft="15dp"
                 android:paddingTop="1dp"
                 android:paddingRight="15dp"
@@ -130,6 +130,7 @@
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="13sp" />
+<!--            android:background="@color/colorPrimary"-->
 
             <!--            <TextView-->
             <!--                android:layout_width="match_parent"-->

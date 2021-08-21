@@ -10,17 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PesticideLib">
-        <activity android:name=".activities.PesticideEditActivity"></activity>
-        <activity android:name=".activities.SearchingActivity" />
-        <activity android:name=".activities.PesticideInfoActivity" />
         <activity
-            android:name=".activities.MainActivity"
-            android:windowSoftInputMode="adjustNothing">
+            android:name=".activities.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.PesticideEditActivity" />
+        <activity android:name=".activities.SearchingActivity" />
+        <activity android:name=".activities.PesticideInfoActivity" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
     </application>
 

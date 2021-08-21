@@ -104,7 +104,8 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
         if (pesticideListFiltered.get(position).getIsSaved() == 1) {
             holder.imvSave.setImageResource(R.drawable.ic_star_yellow_24dp);
-        } else holder.imvSave.setImageResource(R.drawable.ic_star_white_24dp);
+//        } else holder.imvSave.setImageResource(R.drawable.ic_star_white_24dp);
+        } else holder.imvSave.setImageResource(R.drawable.ic_star_white_16dp_black_border);
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
