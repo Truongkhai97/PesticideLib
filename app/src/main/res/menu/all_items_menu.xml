@@ -22,8 +22,7 @@
         <item
             android:id="@+id/option_search_by_disease"
             android:icon="@drawable/search"
-            android:title="Tìm theo bệnh trên cây">
-            </item>
+            android:title="Tìm theo bệnh trên cây" />
         <item
             android:id="@+id/option_search_by_active_ingredient"
             android:icon="@drawable/search"
@@ -32,6 +31,51 @@
             android:id="@+id/option_search_by_producer"
             android:icon="@drawable/search"
             android:title="Tìm theo nhà sản xuất" />
+
+        <item
+            android:id="@+id/option_search_by_group"
+            android:icon="@drawable/search"
+            android:title="Tìm theo nhóm">
+
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/option_search_by_group1"
+                        android:title="Tất cả" />
+                    <item
+                        android:id="@+id/option_search_by_group2"
+                        android:title="Thuốc trừ bệnh" />
+                    <item
+                        android:id="@+id/option_search_by_group3"
+
+                        android:title="Thuốc trừ sâu" />
+                    <item
+                        android:id="@+id/option_search_by_group4"
+                        android:title="Thuốc trừ cỏ" />
+                    <item
+                        android:id="@+id/option_search_by_group5"
+                        android:title="Thuốc trừ ốc" />
+                    <item
+                        android:id="@+id/option_search_by_group6"
+                        android:title="Thuốc trừ mối" />
+                    <item
+                        android:id="@+id/option_search_by_group7"
+                        android:title="Thuốc trừ chuột" />
+                    <item
+                        android:id="@+id/option_search_by_group8"
+                        android:title="Thuốc điều hòa sinh trưởng" />
+                    <item
+                        android:id="@+id/option_search_by_group9"
+                        android:title="Chất dẫn dụ côn trùng" />
+                    <item
+                        android:id="@+id/option_search_by_group10"
+                        android:title="Thuốc khử trùng kho" />
+                    <item
+                        android:id="@+id/option_search_by_group11"
+                        android:title="Thuốc bảo quản lâm sản" />
+                </group>
+            </menu>
+        </item>
         <!--    <item-->
         <!--        android:id="@+id/action_filter"-->
         <!--        android:icon="@drawable/filter"-->

@@ -3,6 +3,7 @@ package com.example.pesticidelib.fragments;
 import android.annotation.SuppressLint;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class AllItemsFragment extends Fragment {
     private List<Pesticide> pesticideList = null;
     private RecyclerViewDataAdapter adapter;
     private final String TAG = "AllItemsFragment";
-    private int choice = 1;
+    private String choice = "1";
     private SearchView searchView = null;
     private Menu menu;
 
@@ -159,7 +160,8 @@ public class AllItemsFragment extends Fragment {
         menu.getItem(1).setChecked(true);
         searchView = (SearchView) itemSearchView.getActionView();
         searchView.setQueryHint("Tên thuốc");
-
+//        searchView.setBackground(R.drawable.rect_border);
+//        searchView.setBackgroundColor(getResources().getColor(R.color.LimeGreen));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -186,28 +188,197 @@ public class AllItemsFragment extends Fragment {
 //        SearchView searchView = (SearchView) menu.getItem(0).getActionView();
         switch (item.getItemId()) {
             case R.id.option_search_by_name:
+                pesticideList = mDBHelper.getAllList();
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
-                choice = 1;
+                choice = "1";
                 searchView.setQueryHint("Tên thuốc");
                 break;
             case R.id.option_search_by_disease:
+                pesticideList = mDBHelper.getAllList();
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
-                choice = 2;
+                choice = "2";
                 searchView.setQueryHint("Tên bệnh hoặc loại cây");
                 break;
             case R.id.option_search_by_active_ingredient:
+                pesticideList = mDBHelper.getAllList();
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
-                choice = 3;
+                choice = "3";
                 searchView.setQueryHint("Tên hoạt chất");
                 break;
             case R.id.option_search_by_producer:
+                pesticideList = mDBHelper.getAllList();
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
                 menu.findItem(R.id.action_search).expandActionView();
                 item.setChecked(true);
-                choice = 4;
+                choice = "4";
                 searchView.setQueryHint("Tên nhà sản xuất");
+                break;
+
+            case R.id.option_search_by_group:
+                pesticideList = mDBHelper.getAllList();
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "1";
+                searchView.setQueryHint("Search");
+                menu.getItem(5).getSubMenu().getItem(0).setChecked(true);
+//                menu.getItem(5).getSubMenu().getItem(1).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(2).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(3).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(4).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(5).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(6).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(7).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(8).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(9).setChecked(false);
+//                menu.getItem(5).getSubMenu().getItem(10).setChecked(false);
+                break;
+
+            case R.id.option_search_by_group1:
+                pesticideList = mDBHelper.getAllList();
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "a";
+                searchView.setQueryHint("Tất cả thuốc");
+                break;
+            case R.id.option_search_by_group2:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc trừ bệnh", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "b";
+                searchView.setQueryHint("Thuốc trừ bệnh");
+//                searchView.setQuery("Thuốc trừ bệnh", true);
+                break;
+            case R.id.option_search_by_group3:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc trừ sâu", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "c";
+                searchView.setQueryHint("Thuốc trừ sâu");
+//                searchView.setQuery("Thuốc trừ sâu", true);
+                break;
+            case R.id.option_search_by_group4:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc trừ cỏ", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "d";
+                searchView.setQueryHint("Thuốc trừ cỏ");
+//                searchView.setQuery("Thuốc trừ cỏ", true);
+                break;
+            case R.id.option_search_by_group5:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc trừ ốc", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "e";
+                searchView.setQueryHint("Thuốc trừ ốc");
+//                searchView.setQuery("Thuốc trừ ốc", true);
+                break;
+            case R.id.option_search_by_group6:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc trừ mối", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "f";
+                searchView.setQueryHint("Thuốc trừ mối");
+//                searchView.setQuery("Thuốc trừ mối", true);
+                searchView.setActivated(false);
+                searchView.setEnabled(false);
+                break;
+            case R.id.option_search_by_group7:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc trừ chuột", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "g";
+                searchView.setEnabled(false);
+                searchView.setActivated(false);
+                searchView.setQueryHint("Thuốc trừ chuột");
+//                searchView.setQuery("Thuốc trừ chuột", true);
+                break;
+            case R.id.option_search_by_group8:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc điều hòa sinh trưởng", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "h";
+                searchView.setClickable(false);
+                searchView.setQueryHint("Thuốc điều hòa sinh trưởng");
+//                searchView.setQuery("Thuốc điều hòa sinh trưởng", true);
+                break;
+            case R.id.option_search_by_group9:
+                pesticideList = mDBHelper.getSearchedItems("Chất dẫn dụ côn trùng", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "j";
+                searchView.setClickable(false);
+                searchView.setQueryHint("Chất dẫn dụ côn trùng");
+//                searchView.setQuery("Chất dẫn dụ côn trùng", true);
+                break;
+            case R.id.option_search_by_group10:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc khử trùng kho", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "k";
+                searchView.setClickable(false);
+                searchView.setQueryHint("Thuốc khử trùng kho");
+//                searchView.setQuery("Thuốc khử trùng kho", true);
+                searchView.clearFocus();
+                break;
+            case R.id.option_search_by_group11:
+                pesticideList = mDBHelper.getSearchedItems("Thuốc bảo quản lâm sản", 3);
+                adapter = new RecyclerViewDataAdapter(this.getContext(), pesticideList, rv_items);
+                rv_items.setAdapter(adapter);
+
+                menu.findItem(R.id.action_search).expandActionView();
+                item.setChecked(true);
+                choice = "l";
+                searchView.setClickable(false);
+                searchView.setQueryHint("Thuốc bảo quản lâm sản");
+//                searchView.setQuery("Thuốc bảo quản lâm sản", true);
+                searchView.clearFocus();
                 break;
         }
         adapter.getFilter().filter(searchView.getQuery().toString() + choice);

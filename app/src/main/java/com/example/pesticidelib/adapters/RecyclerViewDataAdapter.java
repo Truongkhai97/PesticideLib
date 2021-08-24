@@ -1,5 +1,6 @@
 package com.example.pesticidelib.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -30,7 +31,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
     private boolean show_stack_trace = false;
     private List<Pesticide> pesticideListFiltered;
     private RecyclerView recyclerView;
-    private int choice = 1;
+    private String choice = "1";
 
     public RecyclerViewDataAdapter(Context context, List<Pesticide> pesticideList) {
         this.context = context;
@@ -73,24 +74,24 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PesticideDataViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PesticideDataViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String name = pesticideListFiltered.get(position).getTen();
         if (name.length() > 45) {
             name = name.substring(0, 45) + "...";
         }
 
-                switch (choice) {
-            case 2:
+        switch (choice) {
+            case "2":
                 String doituongphongtru = pesticideListFiltered.get(position).getDoituongphongtru();
                 holder.tvName.setText(name);
                 holder.tvType.setText(doituongphongtru);
                 break;
-            case 3:
+            case "3":
                 String hoatchat = pesticideListFiltered.get(position).getHoatchat();
                 holder.tvName.setText(name);
                 holder.tvType.setText(hoatchat);
                 break;
-            case 4:
+            case "4":
                 String tochucdangky = pesticideListFiltered.get(position).getTochucdangky();
                 holder.tvName.setText(name);
                 holder.tvType.setText(tochucdangky);
@@ -174,7 +175,8 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                choice = Integer.parseInt(charSequence.toString().substring(charSequence.length() - 1, charSequence.length()));
+//                choice = Integer.parseInt(charSequence.toString().substring(charSequence.length() - 1, charSequence.length()));
+                choice = charSequence.toString().substring(charSequence.length() - 1, charSequence.length());
                 charSequence = charSequence.toString().substring(0, charSequence.length() - 1);
 
                 String charString = charSequence.toString().trim().replaceAll("\\s+", " ").toLowerCase();
@@ -190,15 +192,15 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                 } else {
                     filteredList = new ArrayList<>();
                     switch (choice) {
-                        case 2:
+                        case "2":
                             for (Pesticide row : pesticideList) {
 //                                if (convertToEng(row.getDoituongphongtru()).toLowerCase().contains(charStringEng.toLowerCase())) {
                                 if (row.getDoituongphongtru_ascii().toLowerCase().contains(charString_ascii)) {
                                     filteredList.add(row);
-                                                                    }
+                                }
                             }
                             break;
-                        case 3:
+                        case "3":
                             for (Pesticide row : pesticideList) {
 //                                if (row.getHoatchat().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
 //                                if (convertToEng(row.getHoatchat()).toLowerCase().contains(charStringEng.toLowerCase())) {
@@ -207,7 +209,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                                 }
                             }
                             break;
-                        case 4:
+                        case "4":
                             for (Pesticide row : pesticideList) {
 //                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
 //                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
@@ -216,6 +218,105 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
                                 }
                             }
                             break;
+//                        case "a":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "b":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc trừ bệnh")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "c":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc trừ sâu")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "d":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc trừ cỏ")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "e":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc trừ ốc")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "f":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc trừ mối")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "g":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc trừ chuột")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "h":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc điều hòa sinh trưởng")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "j":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Chất dẫn dụ côn trùng")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "k":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc khử trùng kho")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
+//                        case "l":
+//                            for (Pesticide row : pesticideList) {
+////                                if (row.getTochucdangky().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
+////                                if (convertToEng(row.getTochucdangky()).toLowerCase().contains(charStringEng.toLowerCase())) {
+//                                if (row.getNhom().contains("Thuốc bảo quản lâm sản")) {
+//                                    filteredList.add(row);
+//                                }
+//                            }
+//                            break;
                         default:
                             for (Pesticide row : pesticideList) {
 //                                if (row.getTen().toLowerCase().contains(charString.toLowerCase()) /*|| row.getHoatchat().contains(charSequence)*/) {
