@@ -16,6 +16,11 @@
         <!--        app:actionViewClass="com.google.android.material.navigation.NavigationView"-->
         <!--        app:showAsAction="ifRoom|collapseActionView" />-->
         <item
+            android:id="@+id/option_search_null"
+            android:icon="@drawable/search"
+            android:visible="false"
+            android:title="" />
+        <item
             android:id="@+id/option_search_by_name"
             android:icon="@drawable/search"
             android:title="Tìm theo tên" />
@@ -34,11 +39,13 @@
 
         <item
             android:id="@+id/option_search_by_group"
-            android:icon="@drawable/search"
-            android:title="Tìm theo nhóm">
+            android:icon="@drawable/filter"
+            android:checkable="false"
+            android:title="Lọc theo nhóm">
 
             <menu>
-                <group android:checkableBehavior="single">
+                <group android:checkableBehavior="single"
+                    android:id="@+id/searchOptions">
                     <item
                         android:id="@+id/option_search_by_group1"
                         android:title="Tất cả" />
