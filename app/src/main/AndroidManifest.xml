@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.PesticideEditActivity" />
-        <activity android:name=".activities.SearchingActivity" />
         <activity android:name=".activities.PesticideInfoActivity" />
         <activity
             android:name=".activities.MainActivity"

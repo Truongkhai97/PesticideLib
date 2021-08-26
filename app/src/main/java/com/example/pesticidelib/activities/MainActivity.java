@@ -2,7 +2,6 @@ package com.example.pesticidelib.activities;
 
 import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,33 +9,23 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pesticidelib.R;
-import com.example.pesticidelib.fragments.AboutFragment;
 import com.example.pesticidelib.fragments.AboutUsFragment;
 import com.example.pesticidelib.fragments.AddFragment;
 import com.example.pesticidelib.fragments.AllItemsFragment;
 import com.example.pesticidelib.fragments.SavedItemsFragment;
-import com.example.pesticidelib.fragments.SearchFragment;
 import com.example.pesticidelib.models.Pesticide;
 import com.example.pesticidelib.utilities.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

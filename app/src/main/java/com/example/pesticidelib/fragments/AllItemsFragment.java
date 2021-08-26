@@ -184,6 +184,8 @@ public class AllItemsFragment extends Fragment {
 
         MenuItem itemSearchByGroup = menu.findItem(R.id.option_search_by_group);
         itemSearchByGroup.getSubMenu().setGroupCheckable(R.id.searchOptions, true, true);
+
+//        menu.findItem(R.id.option_search_by_group).setVisible(false);
     }
 
     @Override
