@@ -174,6 +174,8 @@ public class PesticideInfoActivity extends AppCompatActivity {
         if (pesticide.getIsSaved() == 0) {
             menu.getItem(0).setIcon(R.drawable.add_to_fav);
         } else menu.getItem(0).setIcon(R.drawable.remove_from_fav);
+
+        menu.getItem(1).setVisible(false);
         return true;
     }
 
